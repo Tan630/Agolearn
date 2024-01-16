@@ -27,6 +27,15 @@
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
 2024-01-15 & Yiding Li & First Draft\\
+2024-01-16 & Yiding Li & Add and resolve TODO items
+\begin{enumerate}
+    \item Clarify inputs
+    \item Clarify goals
+    \item Refine stakeholders
+    \item Fix an erroneous figure and its caption
+    \item Resolve TODO item on adding references
+\end{enumerate}
+\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -55,11 +64,17 @@ While evolutionary methods lack the efficiency of traditonal optimization method
 \subsection{Inputs and Outputs}
 
 Input: 
-\textcolor{red}{TODO: Differentiate inputs and outputs for different objectives; if possible, add illustrations.}
+\subsubsection{Optimizing real-valued functions}
 \begin{enumerate}
-    \item An objective function of either values (vectors of numbers) or functions of real numbers
-    \item Specifications for genetic programs, such as (a) node functions, (b) tree depth, and (c) node count
-    \item Parameters that control how the algorithm operates, such as (a) choices of evolutoinary operators, (b) number of episodes, and (c) the length of each episode or truncation conditions
+    \item A real-valued function
+    \item Parameters that control the evolutionary process. Examples are: (a) choices of evolutoinary operators, (b) number of episodes, and (c) the length of each episode or truncation conditions
+\end{enumerate}
+
+\subsubsection{Optimizing higher-ordered functions}
+\begin{enumerate}
+    \item A higher-order function
+    \item Parameters that control how solutions are generated. Examples are: (a) node functions, (b) tree depth, and (c) node count
+    \item Parameters that control the evolutionary process. Examples are: (a) choices of evolutoinary operators, (b) number of episodes, and (c) the length of each episode or truncation conditions
 \end{enumerate}
 
 
@@ -67,19 +82,12 @@ Output: A value or genetic program that optimizes the given objective function
 
 
 \subsection{Stakeholders}
-\textcolor{red}{TODO: Enrich this section.}
-Computer scientistst that seek to optimize an objective function.
-
-\subsection{Environment}
-
-\textcolor{red}{TODO: Seek advise and improve this section.}
-A computer.
+This project is designed for anyone who seeks to optimize against an objective function. In particular, it is able to optimize against black-box or stochastic functions where traditonal optimization methods fail.
 
 \section{Goals}
-
-\textcolor{red}{TODO: Enrich this section. Also, consider moving some from Strech Goals to Goals.}
 \begin{itemize}
-    \item Optimize against an objective function of values (vectors of real numbers)
+    \item Optimize against real-valued functions
+    \item Optimize against higher-order functions
 \end{itemize}
 
 \section{Stretch Goals}
@@ -105,17 +113,14 @@ A computer.
 \end{itemize}
 
 \begin{figure}[h]
-    \textcolor{red}{TODO: Figure is wrong and so is the label.}
-    \caption{Evolutionary operators in}
-    \includegraphics[width=\textwidth]{complete\_picture}    
+    \caption{Stages and operators in an evolutionary episode}
+    \includegraphics[width=\textwidth]{whole\_picture}    
     \centering
 \end{figure}
 
 \subsection{Genetic Algorithms}
 \label{sec:genalg}
 \textbf{Genetic algorithms} (\textbf{GA}) are evolutionary algorithms that work with programs. That is, such algorithms evolve \textit{functions} against an objective function that receive functions. Genetic algorithms can evolve agents that behave well in a particular environment (e.g. \href{https://www.mdpi.com/2227-7390/11/13/2931}{a bipedal walker}) or construct mathematical models (e.g. \href{https://link.springer.com/article/10.1007/s11831-023-09922-z}{symbolic regression})
-
-\textcolor{red}{TODO: Tenative: change hyperlinks to numbered references.}
 
 
 
