@@ -8,9 +8,6 @@
   <summary>Table of Contents</summary>
   <ul>
     <li>
-      <a href="#setup">Setup</a>
-    </li>
-    <li>
       <a href="#usage">Usage</a>
     </li>
     <li>
