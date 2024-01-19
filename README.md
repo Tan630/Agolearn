@@ -33,15 +33,13 @@ An evolutionary, derivative-free optimizer for real-valued and higher-order func
 
 ## Usage
 
-
-
 ## File Structure
 
 The folders and files for this project are as follows:
 
-* `docs/` - Documentation for the project
+* `docs/` - Documentation
 
-* `refs/` - Reference material used for the project, including papers
+* `refs/` - Reference material
 
 * `src/` - Source code
 
@@ -59,24 +57,27 @@ The folders and files for this project are as follows:
 
 - [ ] Implement: optimizer for higher-order functions
 
-## Commit Format
+## Contributing
+### Commit Format
 
 Write commit messages according to the following guidelines:
 
 * Always write commit messages in the present tense, the active voice, and the imperative mood
+* Always write concise, title-only commit messages.
 * Never punctuate the end of titles
-* Always Prefix titles with one of the following labels:
+
+Prefix commit messages with one of the following labels:
 
 |Label|Meaning|
 |-|--------|
-|Feature:| Add or remove a feature|
-|Fix:| Fix a problem |
-|Style:| Changes that improve readability|
-|Performance: | Changes that improve space or time complexity |
-|Doc: | Adding, changing, or removing documentation |
-|Test: | Adding, changing, or removing test cases |
-|Git: | Operations that relate to `git`, such as resolving merge conflicts and rewriting commit messages |
+|Feature:| Add or remove a feature.|
+|Fix:| Fix a problem that affects the satisfaction of a requirement, or the implementation of a feature. |
+|Style:| Changes that improve readability.|
+|Performance: | Changes that improve space or time complexity.|
+|Doc: | Adding, changing, or removing documentation.|
+|Test: | Adding, changing, or removing test cases.|
+|Git: | Operations that relate to `git`, such as resolving merge conflicts and rewriting commit messages.|
 |Meta: | Modify code structure, manage dependencies, update versions, etc. |
 
-## Licence
-None for the time being
+### Licence
+See `licenses/` for licenses for components of this project.
