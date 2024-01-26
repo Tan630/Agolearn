@@ -81,3 +81,5 @@ Prefix commit messages with one of the following labels:
 
 ### Licence
 See `licenses/` for licenses for components of this project.
+
+* `LICENCE-logo`: Project logo uses Latin Modern Math
