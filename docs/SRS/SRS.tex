@@ -1,7 +1,8 @@
 % THIS DOCUMENT IS TAILORED TO REQUIREMENTS FOR SCIENTIFIC COMPUTING.  IT SHOULDN'T
 % BE USED FOR NON-SCIENTIFIC COMPUTING PROJECTS
 \documentclass[12pt]{article}
-
+\usepackage{svg}
+\usepackage{hyperref}
 \usepackage{amsmath, mathtools}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -147,88 +148,17 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+2024-01--22 & 0.1 & Initial draft\\
 \bottomrule
 \end{tabularx}
 
 ~\\
-\plt{This template is intended for use by CAS 741.  For CAS 741 the template
-should be used exactly as given, except the Reflection Appendix can be deleted.
-For the capstone course it is a source of ideas, but shouldn't be followed
-exactly.  The exception is the reflection appendix.  All capstone SRS documents
-should have a refelection appendix.}
 
 ~\newpage
 
 \section{Reference Material}
 
 This section records information for easy reference.
-
-\subsection{Table of Units}
-
-Throughout this document SI (Syst\`{e}me International d'Unit\'{e}s) is employed
-as the unit system.  In addition to the basic units, several derived units are
-used as described below.  For each unit, the symbol is given followed by a
-description of the unit and the SI name.
-~\newline
-
-\renewcommand{\arraystretch}{1.2}
-%\begin{table}[ht]
-  \noindent \begin{tabular}{l l l} 
-    \toprule		
-    \textbf{symbol} & \textbf{unit} & \textbf{SI}\\
-    \midrule 
-    \si{\metre} & length & metre\\
-    \si{\kilogram} & mass	& kilogram\\
-    \si{\second} & time & second\\
-    \si{\celsius} & temperature & centigrade\\
-    \si{\joule} & energy & joule\\
-    \si{\watt} & power & watt (W = \si{\joule\per\second})\\
-    \bottomrule
-  \end{tabular}
-  %	\caption{Provide a caption}
-%\end{table}
-
-\plt{Only include the units that your SRS actually uses.}
-
-\plt{Derived units, like newtons, pascal, etc, should show their derivation
-    (the units they are derived from) if their constituent units are in the
-    table of units (that is, if the units they are derived from are used in the
-    document).  For instance, the derivation of pascals as
-    $\si{\pascal}=\si{\newton\per\square\meter}$ is shown if newtons and m are
-    both in the table.  The derivations of newtons would not be shown if kg and
-    s are not both in the table.}
-
-\plt{The symbol for units named after people use capital letters, but the name
-  of the unit itself uses lower case.  For instance, pascals use the symbol Pa,
-  watts use the symbol W, teslas use the symbol T, newtons use the symbol N,
-  etc.  The one exception to this is degree Celsius.  Details on writing metric
-  units can be found on the 
-  \href{https://www.nist.gov/pml/weights-and-measures/writing-metric-units}
-  {NIST} web-page.}
-
-\subsection{Table of Symbols}
-
-The table that follows summarizes the symbols used in this document along with
-their units.  The choice of symbols was made to be consistent with the heat
-transfer literature and with existing documentation for solar water heating
-systems.  The symbols are listed in alphabetical order.
-
-\renewcommand{\arraystretch}{1.2}
-%\noindent \begin{tabularx}{1.0\textwidth}{l l X}
-\noindent \begin{longtable*}{l l p{12cm}} \toprule
-\textbf{symbol} & \textbf{unit} & \textbf{description}\\
-\midrule 
-$A_C$ & \si[per-mode=symbol] {\square\metre} & coil surface area
-\\
-$A_\text{in}$ & \si[per-mode=symbol] {\square\metre} & surface area over 
-which heat is transferred in
-\\ 
-\bottomrule
-\end{longtable*}
-\plt{Use your problems actual symbols.  The si package is a good idea to use for
-  units.}
 
 \subsection{Abbreviations and Acronyms}
 
@@ -246,63 +176,31 @@ which heat is transferred in
   PS & Physical System Description\\
   R & Requirement\\
   SRS & Software Requirements Specification\\
-  \progname{} & \plt{put an expanded version of your program name here (as appropriate)}\\
+  \progname{} & Agnostic Learner\\
   TM & Theoretical Model\\
   \bottomrule
 \end{tabular}\\
 
-\plt{Add any other abbreviations or acronyms that you add}
-
 \subsection{Mathematical Notation}
 
-\plt{This section is optional, but should be included for projects that make use
-  of notation to convey mathematical information.  For instance, if typographic
-  conventions (like bold face font) are used to distinguish matrices, this
-  should be stated here.  If symbols are used to show mathematical operations,
-  these should be summarized here.  In some cases the easiest way to summarize
-  the notation is to point to a text or other source that explains the
-  notation.}
-
-\plt{This section was added to the template because some students use very
-  domain specific notation.  This notation will not be readily understandable to
-  people outside of your domain.  It should be explained.}
+\todo{Save for later. List notations that are used in the document.}
 
 \newpage
 
 \pagenumbering{arabic}
 
-\plt{This SRS template is based on \citet{SmithAndLai2005, SmithEtAl2007,
-  SmithAndKoothoor2016}.  It will get you started.  You should not modify the
-  section headings, without first discussing the change with the course
-  instructor.  Modification means you are not following the template, which
-  loses some of the advantage of a template, especially standardization.
-  Although the bits shown below do not include type information, you may need to
-  add this information for your problem.  If you are unsure, please can ask the
-  instructor.}
 
-\plt{Feel free to change the appearance of the report by modifying the LaTeX
-  commands.}
 
-\plt{This template document assumes that a single program is being documented.
-  If you are documenting a family of models, you should start with a commonality
-  analysis.  A separate template is provided for this.  For program
-  families you should look at \cite{Smith2006, SmithMcCutchanAndCarette2017}.
-  Single family member programs are often programs based on a single physical
-  model.  General purpose tools are usually documented as a family.  Families of
-  physical models also come up.}
-
-\plt{The SRS is not generally written, or read, sequentially.  The SRS is a
-  reference document.  It is generally read in an ad hoc order, as the need
-  arises.  For writing an SRS, and for reading one for the first time, the
-  suggested order of sections is:
-\begin{itemize}
-\item Goal Statement
-\item Instance Models
-\item Requirements
-\item Introduction
-\item Specific System Description
-\end{itemize}
+\note{
+  A reference document may not need to be read sequentially. For this document, the suggested order is:
 }
+\begin{itemize}
+  \item Goal Statement
+  \item Instance Models
+  \item Requirements
+  \item Introduction
+  \item Specific System Description
+  \end{itemize}
 
 \plt{Guiding principles for the SRS document:
 \begin{itemize}
@@ -337,70 +235,71 @@ which heat is transferred in
 
 \section{Introduction}
 
-\plt{The introduction section is written to introduce the problem.  It starts
-  general and focuses on the problem domain. The general advice is to start with
-a paragraph or two that describes the problem, followed by a ``roadmap''
+\todo{Discuss: the difficulty of black-box optimization problems}
+
+Black-box optimization problems deal with objective functions that are unknown, unexploitable, or non-existent\href{https://www.sciencedirect.com/science/article/pii/S2192440621001386}{ \textsuperscript{\textbf{*}}}. Evolutionary algorithms lend well to optimizing against black-box objective functions.
+
+\plt{ followed by a ``roadmap''
 paragraph.  A roadmap orients the reader by telling them what sub-sections to
 expect in the Introduction section.}
 
 \subsection{Purpose of Document}
 
-\plt{This section summarizes the purpose of the SRS document.  It does not focus
-  on the problem itself.  The problem is described in the ``Problem
-  Description'' section (Section~\ref{Sec_pd}).  The purpose is for the document
-  in the context of the project itself, not in the context of this course.
-  Although the ``purpose'' of the document is to get a grade, you should not
-  mention this.  Instead, ``fake it'' as if this is a real project.  The purpose
-  section will be similar between projects.  The purpose of the document is the
-  purpose of the SRS, including communication, planning for the design stage,
-  etc.}
+This document records requirement specifications of \progname{}. It characterises  inputs and outputs of the software, as well as the context in which the software should be deployed. It describes the software in the following parts:
+\begin{itemize}
+  \item Inputs and outputs of the software
+  \item The broader problem, and the goal that the software should be able to solve
+  \item The theoretical founcation of the software
+\end{itemize}
+
+The document provides a foundation for development. To this end, it does these things:
+\begin{itemize}
+  \item Scope of the software, which affect design decisions
+  \item Assumptions and constraints that affect design decisions
+  \item Mathematical models of inputs, outputs, and expected behavours, which affect implementation. 
+\end{itemize}
 
 \subsection{Scope of Requirements} 
 
-\plt{Modelling the real world requires simplification.  The full complexity of
-  the actual physics, chemistry, biology is too much for existing models, and
-  for existing computational solution techniques.  Rather than say what is in
-  the scope, it is usually easier to say what is not.  You can think of it as
-  the scope is initially everything, and then it is constrained to create the
-  actual scope.  For instance, the problem can be restricted to 2 dimensions, or
-  it can ignore the effect of temperature (or pressure) on the material
-  properties, etc.}  
+\todo{what is the input?}
+This project seeks to implement an black-box optimizer using evolutionary algorithms.
 
-\plt{The scope section is related to the assumptions section
-  (Section~\ref{sec_assumpt}).  However, the scope and the assumptions are not
-  at the same level of abstraction.  The scope is at a high level.  The focus is
-  on the ``big picture'' assumptions.  The assumptions section lists, and
-  describes, all of the assumptions.}
+At this point, the project only considers real-valued objective functions. As a stretch goal, the project also considers higher-order functions of real-valued functions.
+
+The program does not guarantee the optimality of solutions it finds.
+
+Furthermore, the program does not accept constraints on possible solutions. The objective function may encode a soft constraint, however.
 
 \subsection{Characteristics of Intended Reader} \label{sec_IntendedReader}
 
-\plt{This section summarizes the skills and knowledge of the readers of the
-  SRS.  It does NOT have the same purpose as the ``User Characteristics''
-  section (Section~\ref{SecUserCharacteristics}).  The intended readers are the
-  people that will read, review and maintain the SRS.  They are the people that
-  will conceivably design the software that is intended to meet the
-  requirements.  The user, on the other hand, is the person that uses the
-  software that is built.  They may never read this SRS document.  Of course,
-  the same person could be a ``user'' and an ``intended reader.''}
+The reader should be proficient in high school levels of mathematics, in particular:
+\begin{itemize}
+  \item Types
+  \item Real numbers, functions and functions of real numbers
+\end{itemize}
 
-\plt{The intended reader characteristics should be written as unambiguously and
-  as specifically as possible.  Rather than say, the user should have an
-  understanding of physics, say what kind of physics and at what level.  For
-  instance, is high school physics adequate, or should the reader have had a
-  graduate course on advanced quantum mechanics?}
+The reader should understand the following concepts about evolutionary computing:
+
+\begin{itemize}
+  \item Types of values and functions
+  \item The balance between quality and novelty
+  \item Evolutionary operators: (a) evaluator, (b) variator, (c) selectors, and their roles in the evolutionary process
+\end{itemize}
 
 \subsection{Organization of Document}
 
-\plt{This section provides a roadmap of the SRS document.  It will help the
-  reader orient themselves.  It will provide direction that will help them
-  select which sections they want to read, and in what order.  This section will
-  be similar between project.}
+This document begins with an overview of its purpose and the purpose of the project. Then, the document describes the problem as well as the softwares that will solve the problem in more detail. The document ends with a mathematical specification of the problem, the system, as well as decisions that motivate earlier parts.
+
+\todo{After everything else}
 
 \section{General System Description}
 
-This section provides general information about the system.  It identifies the
-interfaces between the system and its environment, describes the user
-characteristics and lists the system constraints.  \plt{This text can likely be
+The program serves two objectives: (a) to optimize real-valued functions, and (b) to optimize higher-order functions.
+
+This section provides general information about the system.  It identifies the interfaces between the system and its environment, describes the user characteristics and lists the system constraints.
+
+
+\plt{This text can likely be
   borrowed verbatim.}
 
 \plt{The purpose of this section is to provide general information about the
@@ -447,38 +346,30 @@ characteristics and lists the system constraints.  \plt{This text can likely be
   For instance, saying ``material properties'' provides some information, but it
   stays away from the detail of listing every required properties.}
 
+\todo {decision is to implement the software as a library}
+
+
+
 \begin{itemize}
 \item User Responsibilities:
 \begin{itemize}
-\item 
+\item Provide correctly typed inputs
 \end{itemize}
 \item \progname{} Responsibilities:
 \begin{itemize}
-\item Detect data type mismatch, such as a string of characters instead of a
-  floating point number
-\item 
+\item Detect mistyped inputs
+\item Detect constraint violations of the input
+\item Calculate the required outputs
 \end{itemize}
 \end{itemize}
 
 \subsection{User Characteristics} \label{SecUserCharacteristics}
 
-\plt{This section summarizes the knowledge/skills expected of the user.
-  Measuring usability, which is often a required non-function requirement,
-  requires knowledge of a typical user.  As mentioned above, the user is a
-  different role from the ``intended reader,'' as given in
-  Section~\ref{sec_IntendedReader}.  As in Section~\ref{sec_IntendedReader}, the
-  user characteristics should be specific an unambiguous.  For instance, ``The
-  end user of \progname{} should have an understanding of undergraduate Level 1
-  Calculus and Physics.''}
+The user should be comfortable with programming with floating-point numbers and functions.
 
-\subsection{System Constraints}
+The user should be able to use the system as a library. \todo{decision - where does it go?}
 
-\plt{System constraints differ from other type of requirements because they
-  limit the developers' options in the system design and they identify how the
-  eventual system must fit into the world. This is the only place in the SRS
-  where design decisions can be specified.  That is, the quality requirement for
-  abstraction is relaxed here.  However, system constraints should only be
-  included if they are truly required.}
+The user should be aware of common evolutionary operators, and be able to select from a pre-defined list.
 
 \section{Specific System Description}
 
@@ -490,16 +381,11 @@ the instance models.  \plt{Add any project specific details that are relevant
 
 \subsection{Problem Description} \label{Sec_pd}
 
-\progname{} is intended to solve ... \plt{What problem does your program solve?
-The description here should be in the problem space, not the solution space.}
+\progname{} intends to solve optimization problems for objective functions that do not follow a particular form.
 
 \subsubsection{Terminology and  Definitions}
 
-\plt{This section is expressed in words, not with equations.  It provide the
-  meaning of the different words and phrases used in the domain of the problem.
-The terminology is used to introduce concepts from the world outside of the
-mathematical model  The terminology provides a real world connection to give the
-mathematical model meaning.}
+\todo{move the big boy here}
 
 This subsection provides a list of terms that are used in the subsequent
 sections and their meaning, with the purpose of reducing ambiguity and making it
@@ -511,33 +397,10 @@ easier to correctly understand the requirements:
 
 \end{itemize}
 
-\subsubsection{Physical System Description} \label{sec_phySystDescrip}
 
-\plt{The purpose of this section is to clearly and unambiguously state the
-  physical system that is to be modelled. Effective problem solving requires a
-  logical and organized approach. The statements on the physical system to be
-  studied should cover enough information to solve the problem. The physical
-  description involves element identification, where elements are defined as
-  independent and separable items of the physical system. Some example elements
-  include acceleration due to gravity, the mass of an object, and the size and
-  shape of an object. Each element should be identified and labelled, with their
-  interesting properties specified clearly. The physical description can also
-  include interactions of the elements, such as the following: i) the
-  interactions between the elements and their physical environment; ii) the
-  interactions between elements; and, iii) the initial or boundary conditions.}
-
-The physical system of \progname{}, as shown in Figure~?,
-includes the following elements:
-
-\begin{itemize}
-
-\item[PS1:] 
-
-\item[PS2:] ...
-
-\end{itemize}
-
-\plt{A figure here makes sense for most SRS documents}
+\begin{center}
+  \includegraphics[width=0.7\textwidth]{pasta}
+\end{center}
 
 % \begin{figure}[h!]
 % \begin{center}
@@ -551,27 +414,23 @@ includes the following elements:
 
 \subsubsection{Goal Statements}
 
-\plt{The goal statements refine the ``Problem Description''
-  (Section~\ref{Sec_pd}).  A goal is a functional objective the system under
-  consideration should achieve. Goals provide criteria for sufficient
-  completeness of a requirements specification and for requirements
-  pertinence. Goals will be refined in Section “Instanced Models”
-  (Section~\ref{sec_instance}). Large and complex goals should be decomposed
-  into smaller sub-goals.  The goals are written abstractly, with a minimal
-  amount of technical language.  They should be understandable by non-domain
-  experts.}
+For each objective function, the program accepts a population of initial populations. The end population should seek to optimize the objective function.
 
-\noindent Given the \plt{inputs}, the goal statements are:
+\noindent Given the inputs, the goal statements are:
 
 \begin{itemize}
 
-\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_meaningfulLabel}:] \plt{One
-    sentence description of the goal.  There may be more than one.  Each Goal
-    should have a meaningful label.}
+\item[GS\refstepcounter{goalnum}\thegoalnum \label{o_reals}:] Optimize against real-valued functions
+\item[GS\refstepcounter{goalnum}\thegoalnum \label{o_h of}:] Optimize against higher-order functions
 
 \end{itemize}
 
 \subsection{Solution Characteristics Specification}
+
+The system should produce a solution that optimizes the given objective function. The solution should have the same type of the initial population.
+
+The highest score of the output should be greater or equal to that of the initial population.
+
 
 \plt{This section specifies the information in the solution domain of the system
   to be developed. This section is intended to express what is required in
@@ -624,12 +483,9 @@ Subsection~\ref{sec_instance}.  The information to understand the meaning of the
 instance models and their derivation is also presented, so that the instance
 models can be verified.
 
-\subsubsection{Types}
-
-\plt{This section is optional. Defining types can make the document easier to
-understand.}
 
 \subsection{Scope Decisions}
+This system only optimizes functions of real numbers, as well as higher-order functions.
 
 \plt{This section is optional.}
 \subsection{Modelling Decisions}
@@ -637,6 +493,8 @@ understand.}
 \plt{This section is optional.}
 
 \subsubsection{Assumptions} \label{sec_assumpt}
+
+Critically, to ensure that the result is optimized, the objective function should be consistant. That is, it should involve minimal stochasticy and do not change with time. The system will make no attempt to understand higher-order changes.
 
 \plt{The assumptions are a refinement of the scope.  The scope is general, where
   the assumptions are specific.  All assumptions should be listed, even those
@@ -1345,25 +1203,5 @@ Their values are defined in this section for easy maintenance.}
 }
 
 \newpage{}
-\section*{Appendix --- Reflection}
-
-The information in this section will be used to evaluate the team members on the
-graduate attribute of Lifelong Learning.  Please answer the following questions:
-
-\begin{enumerate}
-  \item Which of the courses you have taken, or are currently taking, will help
-  your team to be successful with your capstone project.
-  \item What knowledge and skills will the team collectively need to acquire to
-  successfully complete this capstone project?  Examples of possible knowledge
-  to acquire include domain specific knowledge from the domain of your
-  application, or software engineering knowledge, mechatronics knowledge or
-  computer science knowledge.  Skills may be related to technology, or writing,
-  or presentation, or team management, etc.  You should look to identify at
-  least one item for each team member.
-  \item For each of the knowledge areas and skills identified in the previous
-  question, what are at least two approaches to acquiring the knowledge or
-  mastering the skill?  Of the identified approaches, which will each team
-  member pursue, and why did they make this choice?
-\end{enumerate}
 
 \end{document}
