@@ -59,6 +59,7 @@ The folders and files for this project are as follows:
 - [ ] Implement: optimizer for higher-order functions
 
 ## Contributing
+Please also reference <a href="./CONTRIBUTE.md">CONTRIBUTE.md</a>
 ### Commit Format
 
 Write commit messages according to the following guidelines:
