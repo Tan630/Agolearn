@@ -220,11 +220,11 @@ As evolutionary algorithms lend well to optimizing against black-box objective f
 This section includes the following subsections:
 \begin{itemize}
   
-  \item \secref{subsec:purpose}: Intent of this document.
+  \item \secref{subsec:purpose}: A rough overview of this document: its intent, its contents, and its position in the development process.
   \item \secref{subsec:scopep}: Scope of problems that \thisproject{} seeks to address, an abstraction of assumptions.
   % \item \todo{The scope of the requirement is the scope of the project, in that we use the "faking it" process and are allowed to add requirements retroactively to the documention, so that the document serves as a reference, not just an artifact that we make then forget. So the requirement alwauys coverse the maximum of our knowledge and its scope extends to that of the project}
   \item \secref{subsec:reader}: Assumptions about the reader, including their knowledge and goals. This document is intended for readers who satisfy these assumptions.
-  \item \secref{subsec:organ}: Major sections of this document following the introduction.
+  \item \secref{subsec:organ}: Major sections of this document that follow the introduction.
 \end{itemize}
 
 \subsection{Purpose of Document}
@@ -233,7 +233,6 @@ This section includes the following subsections:
 % There must be a better way to put it.
 This document records requirement specifications of \progname{}, in particular of the software that should satisfy these requirements. This document explains requirement specifications in the following parts:
 
-% I find it apt to 
 \begin{itemize}
   \item Scope and refined assumptions
   \item Problem and refined goals
@@ -244,7 +243,7 @@ This document records requirement specifications of \progname{}, in particular o
 
 \subsection{Scope of Project} 
 \label{subsec:scopep}
-
+% Mention of Genomes precedes definitions, which are defined in 2.3 earliest.
 Genomes, in particular variators that operate upon genomes, are costly to implement. As such, \thisproject{} only implements genomes of real vectors and genetic programs and only implements objective functions from these types. This scope decision refines to \aref{A_TYPE_REAL} and \aref{A_TYPE_HIGHER}
 % Can I say "this scope decision ... refines to ... ?"
 \thisproject{} use evolutionary algorithms, which are iterative, do not guarantee optimality, and do not incorporate hard constraints. This scope decision refines to \aref{A_ONLYEVO}, \aref{A_NOPOT}, \aref{A_ITER}, and \aref{A_NOCON}.
@@ -557,7 +556,7 @@ This section includes the following subsections:
 \label{subsubsec:rationale}
 
 % Question here
-\todo{Work in progress. My rationales are dispersed throughout the document, there has yet to be rationale that beongs here, I feel.}
+\note{None at the moment}
 
 \section{Likely Changes}
 \label{sec:lchanges}
@@ -597,6 +596,9 @@ general definitions, data definitions, instance models, and likely changes on
 the assumptions.
 
 \afterpage{
+
+
+
 \begin{landscape}
 \begin{table}[h!]
 \centering
@@ -621,6 +623,35 @@ the assumptions.
 \caption{Traceability Matrix Showing the Connections Between Assumptions and Other Items}
 \label{Table:A_trace}
 \end{table}
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|}
+  \hline
+    & \iref{IM_REALS}& \iref{IM_HIGHER}\\
+  \hline
+  \aref{R_EVOCHANGE}             &X&X \\ \hline
+  \aref{R_TYPETHEN}             & X&X \\ \hline
+  \aref{R_TYPECHECK}             & X&X \\ \hline
+  \aref{R_IMBETTER}             & X&X \\ \hline
+  
+  \hline
+  \end{tabular}
+  % Would it be better to connect goals and instance models?
+  \caption{Traceability Matrix Showing the Connections Between Requirements and Instance Models}
+  \label{Table:R_trace}
+  \end{table}
+
+  \begin{figure}[h!]
+    \begin{center}
+      {
+        \includegraphics[width=0.7\textwidth]{goblin.png}
+      }
+      \caption{\label{Fig_RTrace} Traceability Matrix Showing the 
+  Connections Between Assumptions, Goal Statements, and Instance Models}
+    \end{center}
+  \end{figure}
+
 \end{landscape}
 }
 
@@ -638,30 +669,14 @@ the assumptions.
 % \label{Table:trace}
 % \end{table}
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline
-	& \iref{IM_REALS}& \iref{IM_HIGHER}\\
-\hline
-\aref{R_EVOCHANGE}             &X&X \\ \hline
-\aref{R_TYPETHEN}             & X&X \\ \hline
-\aref{R_TYPECHECK}             & X&X \\ \hline
-\aref{R_IMBETTER}             & X&X \\ \hline
-
-\hline
-\end{tabular}
-% Would it be better to connect goals and instance models?
-\caption{Traceability Matrix Showing the Connections Between Requirements and Instance Models}
-\label{Table:R_trace}
-\end{table}
-
 The purpose of the traceability graphs is also to provide easy references on
 what has to be additionally modified if a certain component is changed.  The
 arrows in the graphs represent dependencies. The component at the tail of an
 arrow is depended on by the component at the head of that arrow. Therefore, if a
 component is changed, the components that it points to should also be
 changed. 
+
+
 
 % I do not have these things
 %Figure~\ref{Fig_ATrace} shows the dependencies of theoretical models,
@@ -680,23 +695,23 @@ changed.
 % \end{figure}
 
 
-% \begin{figure}[h!]
-% 	\begin{center}
-% 		%\rotatebox{-90}
-% 		{
-% 			\includegraphics[width=0.7\textwidth]{RTrace.png}
-% 		}
-% 		\caption{\label{Fig_RTrace} Traceability Matrix Showing the Connections Between Requirements, Instance Models, and Data Constraints}
-% 	\end{center}
-% \end{figure}
+
+
+
+
+
+
+
+
+
 
 \section{Development Plan}
 
-\todo{Leave for later, may be useful.}
+Develop an abstract framework that represents the evolutionary process, then craft instances of these operators.
 
 \section{Values of Auxiliary Constants}
 
-\todo{Leave for later, may be useful.}
+\note{None at the moment}
 
 
 \newpage
