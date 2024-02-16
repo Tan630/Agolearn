@@ -29,12 +29,10 @@
 </details>
 
 
-This project is an evolutionary, derivative-free optimizer that generates genetic programs.
-
-
-## Setup
+An evolutionary, derivative-free optimizer for real-valued and higher-order functions.
 
 ## Usage
+
 
 
 ## File Structure
@@ -53,17 +51,17 @@ The folders and files for this project are as follows:
 
 ## Roadmap
 
-* Consult @smiths [Github](https://github.com/smiths) for where to put his license
+- [ ] Add Licensing information (Consult @smiths [Github](https://github.com/smiths) for where to put his license)
 
-* Finalize project proposal
+- [x] Problem statement
 
-* Implement: genetic algorithm optimizer
+- [ ] Implement: optimizer for real-valued functions
 
-* Implement: function optimizer
+- [ ] Implement: optimizer for higher-order functions
 
 ## Commit Format
 
-Commit messages in this project should observe the following guidelines:
+Write commit messages according to the following guidelines:
 
 * Always write commit messages in the present tense, the active voice, and the imperative mood
 * Never punctuate the end of titles
