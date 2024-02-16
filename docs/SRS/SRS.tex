@@ -220,7 +220,7 @@ As evolutionary algorithms lend well to optimizing against black-box objective f
 This section includes the following subsections:
 \begin{itemize}
   
-  \item \secref{subsec:purpose}: Intent of this doocument.
+  \item \secref{subsec:purpose}: Intent of this document.
   \item \secref{subsec:scopep}: Scope of problems that \thisproject{} seeks to address, an abstraction of assumptions.
   % \item \todo{The scope of the requirement is the scope of the project, in that we use the "faking it" process and are allowed to add requirements retroactively to the documention, so that the document serves as a reference, not just an artifact that we make then forget. So the requirement alwauys coverse the maximum of our knowledge and its scope extends to that of the project}
   \item \secref{subsec:reader}: Assumptions about the reader, including their knowledge and goals. This document is intended for readers who satisfy these assumptions.
@@ -231,7 +231,7 @@ This section includes the following subsections:
 \label{subsec:purpose}
 
 % There must be a better way to put it.
-This document records requirement specifications of \progname{}, in particular of the software that should satisfy these requirements. This document explains requirement specifications in the folowing parts:
+This document records requirement specifications of \progname{}, in particular of the software that should satisfy these requirements. This document explains requirement specifications in the following parts:
 
 % I find it apt to 
 \begin{itemize}
@@ -258,7 +258,7 @@ Genomes, in particular variators that operate upon genomes, are costly to implem
 Readers of this document should have proficiency in at least high school level math\href{https://www.edu.gov.on.ca/eng/curriculum/secondary/math1112currb.pdf}{\textsuperscript{link}}. In addition, readers should be familiar with the following concepts relating to optimization and evolutionary learning:
 
 \begin{itemize}
-  \item Optimization: Objective functions, hyperparameters, and iterative processes
+  \item Optimization: Objective functions, hyper-parameters, and iterative processes
   \item The balance between quality and novelty
   \item Evolutionary operators: (a) evaluator, (b) variator, (c) selectors, and their roles in the evolutionary process
 \end{itemize}
@@ -304,7 +304,7 @@ This section includes the following subsections:
 \subsection{System Context}
 \label{subsec:syscontext}
 
-\thisproject implements an optimizer. As an optimizer, \thisproject takes (a) an objective function and (b) hyperparameters that instruct the optimization process. As an optimizer, \thisproject outputs a solution that optimizes the given objective function. \autoref{Fig_SystemContext} describes the interaction between \thisproject and the user.
+\thisproject implements an optimizer. As an optimizer, \thisproject takes (a) an objective function and (b) hyper-parameters that instruct the optimization process. As an optimizer, \thisproject outputs a solution that optimizes the given objective function. \autoref{Fig_SystemContext} describes the interaction between \thisproject and the user.
 
 \begin{figure}[h!]
 \begin{center}
@@ -314,8 +314,8 @@ This section includes the following subsections:
 \end{center}
 \end{figure}
 
-% In some systems, such as self driving cars,  responsibility extends beyond the sustem. For example, the user is responsible for following GPS navigation instructions to get to the destination.
-Responsibilities of \thisproject and the user are as follows. Appropriate performance of \thisproject to its specification requires that both responsibilties are satisfied.
+% In some systems, such as self driving cars,  responsibility extends beyond the system. For example, the user is responsible for following GPS navigation instructions to get to the destination.
+Responsibilities of \thisproject and the user are as follows. Appropriate performance of \thisproject to its specification requires that both responsibilities are satisfied.
 \begin{itemize}
   \item User Responsibility:
   \begin{itemize}
@@ -360,7 +360,7 @@ Optimization of black-box functions: functions that do not follow a particular f
 \subsubsection{Terminology and Definitions}
 \label{subsubsec:terms}
 
-% I consider moving them to earlier - or maybe it's better to move the termonologies that occur before to after this point.
+% I consider moving them to earlier - or maybe it's better to move the terms that occur before to after this point.
 The following terms are used in subsequent sections:
 
 \begin{itemize}
@@ -391,7 +391,7 @@ The following terms are used in subsequent sections:
 
 \subsubsection{Goal Statements}
 
-\thisproject{} accepts objective function as evaluators. For each objective funnction, \thisproject{} returns a genome with optimal fitness.
+\thisproject{} accepts objective function as evaluators. For each objective function, \thisproject{} returns a genome with optimal fitness.
 
 \noindent In particular, given the assumed inputs, the goal statements are:
 
@@ -444,7 +444,7 @@ Consequently, the restriction on the types of solutions restricts the range of i
 
 \subsubsection{Instance Models} \label{sec_instance}    
 
-The following instance models describe systemss that corresponds to goals.
+The following instance models describe systems that corresponds to goals.
 
 ~\newline
 \noindent
@@ -463,13 +463,13 @@ The following instance models describe systemss that corresponds to goals.
   \hline
   Description&The system receives a real-valued objective function, then emits a real vector that optimizes the objective function. \\
   \hline
-  Goal&\gsref{GO_REALS}
+  Goal&\gsref{GS_REALS}
   \\
   \hline
 \end{tabular}
 \end{minipage}\\
 
-~\newline\
+~\newline
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.5}
@@ -487,7 +487,7 @@ The following instance models describe systemss that corresponds to goals.
   \hline
   Description&The system receives a higher-order objective function of functions, then emits a function that optimizes the given objective function.\\
   \hline
-  Goal&\gsref{GO_HIGHER}
+  Goal&\gsref{GS_HIGHER}
   \\
   \hline
 \end{tabular}
@@ -512,7 +512,7 @@ This section includes the following subsections:
 \begin{itemize}
   \item \secref{subsubsec:freq}: Requirements that make explicit tasks and behaviours the software should complete
   \item \secref{subsubsec:nfreq}: Requirements that facilitate the satisfaction of functional requirements
-  \item \secref{subsubsec:rationale}: Rationale for scope decisions, modeling decisison, and assumptions
+  \item \secref{subsubsec:rationale}: Rationale for scope decisions, modeling decision, and assumptions
 \end{itemize}
 
 \subsection{Functional Requirements}
@@ -545,7 +545,7 @@ This section includes the following subsections:
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Maintainability}:]
   \textbf{Maintainability} 
-  Implementation of the software should be typed. Where types cannot be inforced, types must be hinted.
+  Implementation of the software should be typed. Where types cannot be enforced, types must be hinted.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Portability}:]
   \textbf{Portability} The system should be able to run on Windows 11, up to 024-01 Cumulative Update for Windows 11 Version 22H2 for x64-based Systems (KB5034123)
@@ -565,7 +565,7 @@ This section includes the following subsections:
 \noindent \begin{itemize}
 
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_EVOP}:] The selection of evolution operators have not been defined and will change.
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_HYPER}:] Hyperparameters are not concretely defined. The types of hyperparameter inputs will change.
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_HYPER}:] Hyper-parameters are not concretely defined. The types of hyperparameter inputs will change.
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_OBJC}:] Implementation of other types of objective functions.
 
 \end{itemize}
@@ -587,9 +587,10 @@ This section includes the following subsections:
 The purpose of the traceability matrices is to provide easy references on what
 has to be additionally modified if a certain component is changed.  Every time a
 component is changed, the items in the column of that component that are marked
-with an ``X'' may have to be modified as well.  Table~\ref{Table:trace} shows the
-dependencies of theoretical models, general definitions, data definitions, and
-instance models with each other. Table~\ref{Table:R_trace} shows the
+% with an ``X'' may have to be modified as well.  Table~\ref{Table:trace} shows the
+% dependencies of theoretical models, general definitions, data definitions, and
+% instance models with each other. 
+Table~\ref{Table:R_trace} shows the
 dependencies of instance models, requirements, and data constraints on each
 other. Table~\ref{Table:A_trace} shows the dependencies of theoretical models,
 general definitions, data definitions, instance models, and likely changes on
@@ -650,6 +651,7 @@ the assumptions.
 
 \hline
 \end{tabular}
+% Would it be better to connect goals and instance models?
 \caption{Traceability Matrix Showing the Connections Between Requirements and Instance Models}
 \label{Table:R_trace}
 \end{table}
