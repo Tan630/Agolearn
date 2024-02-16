@@ -484,26 +484,18 @@ instance models and their derivation is also presented, so that the instance
 models can be verified.
 
 
+
 \subsection{Scope Decisions}
 This system only optimizes functions of real numbers, as well as higher-order functions.
 
-\plt{This section is optional.}
-\subsection{Modelling Decisions}
+An evolutionary algorithm must define a variator for each individual selector. Such variators are costly to implement and it would be difficult to require them as user inputs. The decision is made to restrict representations to two types: vectors of real values and higher-order functions. 
 
-\plt{This section is optional.}
+Consequently, the restriction on the types of solutions restricts the range of inputs
 
 \subsubsection{Assumptions} \label{sec_assumpt}
 
-Critically, to ensure that the result is optimized, the objective function should be consistant. That is, it should involve minimal stochasticy and do not change with time. The system will make no attempt to understand higher-order changes.
+To ensure that the result is optimized, the objective function should be consistant. That is, it should involve minimal stochasticy and do not change with time. The system will make no attempt to understand higher-order changes.
 
-\plt{The assumptions are a refinement of the scope.  The scope is general, where
-  the assumptions are specific.  All assumptions should be listed, even those
-  that domain experts know so well that they are rarely (if ever) written down.}
-\plt{The document should not take for granted that the reader knows which
-  assumptions have been made. In the case of unusual assumptions, it is
-  recommended that the documentation either include, or point to, an explanation
-  and justification for the assumption.}
-\plt{If it helps with the organization and understandability, the assumptions can be presented as sub sections.  The following sub-sections are options: background theory assumptions, helper theory assumptions, generic theory assumptions, problem specific assumptions, and rationale assumptions}
 
 This section simplifies the original problem and helps in developing the
 theoretical model by filling in the missing information for the physical system.
