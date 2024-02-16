@@ -51,7 +51,7 @@ The folders and files for this project are as follows:
 
 - [ ] Add Licensing information (Consult @smiths [Github](https://github.com/smiths) for where to put his license)
 
-- [x] Problem statement
+- [x] [Problem statement](https://github.com/Tan630/Agolearn/blob/main/docs/ProblemStatementAndGoals/ProblemStatement.pdf)
 
 - [ ] Implement: optimizer for real-valued functions
 
