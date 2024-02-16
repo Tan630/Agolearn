@@ -204,6 +204,7 @@ This section records information for easy reference.
   \midrule 
   $\mathbb{R}$ & Type of real numbers\\
   $\mathbb{R}^n$ & Type of real vectors\\
+  $A\rightarrow B$ & Type of functions from type $A$ to type $B$\\
   $\mathbb{R}^n\rightarrow \mathbb{R}$ & Type of functions from real vectors to real numbers\\
   \bottomrule
 \end{tabular}\\
@@ -373,6 +374,7 @@ The subsequent sections use the following terms. Definitions are given according
   \item Parents: A pool of genomes about to undergo variation
   \item Offspring: The output of a variator
   \item Fitness: The score of a genome according to the evaluator
+  \item Higher-Order Function: A function from a function to a value
 \end{itemize}
 
 
@@ -429,7 +431,7 @@ Consequently, the restriction on the types of solutions restricts the range of i
 \begin{itemize}
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_TYPE_REAL}:] The input objective function can be real-valued (\gsref{GS_REALS})
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_TYPE_HIGHER}:] The input objective function can be higher-ordered (\gsref{GS_HIGHER})
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_TYPE_HIGHER}:] The input objective function can be a higher-order function (\gsref{GS_HIGHER})
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_ONLYEVO}:] 
 \thisproject{} implements evolutionary algorithms
 % A better word for "... only implements"?
@@ -484,7 +486,7 @@ The following instance models describe systems that corresponds to goals.
   \hline
   Output&$X : (A^n\rightarrow B)$\\
   \hline
-  Description&The system receives a higher-order objective function of functions, then emits a function that optimizes the given objective function.\\
+  Description&The system receives a higher-order objective function, then emits a function that optimizes the given objective function.\\
   \hline
   Goal&\gsref{GS_HIGHER}
   \\
