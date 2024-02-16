@@ -525,7 +525,8 @@ This section includes the following subsections:
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_EVOCHANGE}:] Evolutionary operators of the same type can be used interchangeably 
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_IMBETTER}:] Each generation of the algorithm (\aref{A_ITER}) should produce a genome with equal or higher fitness than the previous generation (\aref{A_NOPOT}).
+\item[] \item[R\refstepcounter{reqnum}\thereqnum \label{R_IEND}:] Each iteration of the algorithm (\aref{A_ITER}) should produce a genome (\aref{A_NOPOT}).
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_IMBETTER}:] Each genome produced by the algorithm (\aref{R_IEND}) have equal or higher fitness than that of the previous generation (\aref{A_NOPOT}).
 
 \end{itemize}
 
@@ -607,19 +608,20 @@ the assumptions.
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
 & \gsref{GS_REALS}
-& \gsref{GS_HIGHER}
-& \rref{R_IMBETTER}
-& \aref{A_NOPOT}
-& \aref{A_ITER}\\
+  & \gsref{GS_HIGHER}
+    & \rref{R_IEND}
+      & \rref{R_IMBETTER}
+        & \aref{A_NOPOT}
+          & \aref{A_ITER}\\
 
 \hline
-\aref{A_TYPE_REAL}        &$\leftarrow$& & & & \\
-\aref{A_TYPE_HIGHER}      & &$\leftarrow$& & & \\
-\aref{A_ONLYEVO}          & & & &$\rightarrow$&$\rightarrow$\\
-\aref{A_NOPOT}            & & &$\rightarrow$& & \\
-\aref{A_ITER}             & & &$\rightarrow$& & \\
-\aref{A_NOCON}            & & & & & \\
-\aref{A_DAD_IM_A_LIBRARY} & & & & & \\ 
+\aref{A_TYPE_REAL}        &$\leftarrow$& & & & & \\
+\aref{A_TYPE_HIGHER}      & &$\leftarrow$& & & & \\
+\aref{A_ONLYEVO}          & & & & &$\rightarrow$&$\rightarrow$\\
+\aref{A_NOPOT}            & & & &$\rightarrow$& & \\
+\aref{A_ITER}             & & &$\rightarrow$& & & \\
+\aref{A_NOCON}            & & & & & & \\
+\aref{A_DAD_IM_A_LIBRARY} & & & & & & \\ 
 
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Assumptions and Other Items}
@@ -647,7 +649,7 @@ the assumptions.
   \begin{figure}[h!]
     \begin{center}
       {
-        \includegraphics[width=0.7\textwidth]{goblin.png}
+        \includegraphics[width=0.7\textwidth]{tracer}
       }
       \caption{\label{Fig_RTrace} Traceability Matrix Showing the 
   Connections Between Assumptions, Goal Statements, and Instance Models}
