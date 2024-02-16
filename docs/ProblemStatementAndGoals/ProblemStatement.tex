@@ -50,7 +50,7 @@
 
 \subsection{Problem}
 
-This project seeks to implement an evolutionary optimizer for arbtrary real-valued functions and higher-ordered functions.
+This project seeks to implement an evolutionary optimizer for arbitrary real-valued functions and higher-ordered functions.
 
 While \hyperref[sec:evalg]{evolutionary algorithms} lack the efficiency of traditional optimization algorithms, they lend well to solving poorly understood, dynamic, or black-box problems. As such, usage of evolutionary algorithms is key to imeplemting this project. \hyperref[sec:genalg]{Generic programming algorithms}, in particular, make it possible to build functions that optimize higher-order functions.
 
@@ -67,7 +67,7 @@ While \hyperref[sec:evalg]{evolutionary algorithms} lack the efficiency of tradi
 \textbf{Input}:
 \begin{enumerate}
     \item A real-valued function.
-    \item Parameters that control the evolutionary process. Examples are: (a) choices of evolutoinary operators, (b) number of episodes, and (c) the length of each episode or truncation conditions.
+    \item Parameters that control the evolutionary process. Examples are: (a) choices of evolutionary operators, (b) number of episodes, and (c) the length of each episode or truncation conditions.
 \end{enumerate}
 \textbf{Output}: A real vector that optimizes the given real-valued function.
 
@@ -76,7 +76,7 @@ While \hyperref[sec:evalg]{evolutionary algorithms} lack the efficiency of tradi
 \begin{enumerate}
     \item A higher-order function.
     \item Parameters that control how solutions are generated. Examples are: (a) node functions, (b) tree depth, and (c) node count.
-    \item Parameters that control the evolutionary process. Examples are: (a) choices of evolutoinary operators, (b) number of episodes, and (c) the length of each episode or truncation conditions.
+    \item Parameters that control the evolutionary process. Examples are: (a) choices of evolutionary operators, (b) number of episodes, and (c) the length of each episode or truncation conditions.
 \end{enumerate}
 \textbf{Output}: A function that optimizes the given higher-order function.
 
@@ -106,7 +106,7 @@ This project can be used by anyone who seeks to optimize an objective function. 
 
 \begin{itemize}
     \item \textbf{Parent selectors} select from the population to form the parent pool.
-    \item \textbf{Variators} act on the parent pool to produce a pool of offsprings. An offspring may inherit traits from parents (by crossover) or posess novel traits (by mutation).
+    \item \textbf{Variators} act on the parent pool to produce a pool of offspring. An offspring may inherit traits from parents (by crossover) or posses novel traits (by mutation).
     \item \textbf{Survivor selectors} select from the offspring pool to form the population for the next generation.
 \end{itemize}
 
