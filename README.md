@@ -50,7 +50,7 @@ The folders and files for this project are as follows:
 
 ## Roadmap
 
-- [ ] Add Licensing information (Consult @smiths [Github](https://github.com/smiths) for where to put his license)
+- [x] Add component licenses
 
 - [x] [Problem statement](https://github.com/Tan630/Agolearn/blob/main/docs/ProblemStatementAndGoals/ProblemStatement.pdf)
 
