@@ -149,6 +149,7 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 2024-01--22 & 0.1 & Initial draft\\
+2024-02--02 & 0.2 & Initial complete draft\\
 \bottomrule
 \end{tabularx}
 
@@ -182,6 +183,17 @@ This section records information for easy reference.
 \end{tabular}\\
 
 \subsection{Mathematical Notation}
+\begin{tabular}{l l} 
+  \toprule		
+  \textbf{symbol} & \textbf{description}\\
+  \midrule 
+  $\mathbb{R}$ & Real number\\
+  $\mathbb{R}^n$ & Real vector\\
+  $\mathbb{R}^n\rightarrow \mathbb{R}$ & Function from real vectors to real numbers\\
+  \bottomrule
+\end{tabular}\\
+
+\citet{HoffmanAndStrooper1995} This thing has caused me great pain.
 
 \todo{Save for later. List notations that are used in the document.}
 
@@ -202,83 +214,55 @@ This section records information for easy reference.
   \item Specific System Description
   \end{itemize}
 
-\plt{Guiding principles for the SRS document:
-\begin{itemize}
-\item Do not repeat the same information at the same abstraction level.  If
-  information is repeated, the repetition should be at a different abstraction
-  level.  For instance, there will be overlap between the scope section and the
-  assumptions, but the scope section will not go into as much detail as the
-  assumptions section.
-\end{itemize}
-}
 
-\plt{The template description comments should be disabled before submitting this
-  document for grading.}
-
-\plt{You can borrow any wording from the text given in the template.  It is part
-  of the template, and not considered an instance of academic integrity.  Of
-  course, you need to cite the source of the template.}
-
-\plt{When the documentation is done, it should be possible to trace back to the
-  source of every piece of information.  Some information will come from
-  external sources, like terminology.  Other information will be derived, like
-  General Definitions.}
-
-\plt{An SRS document should have the following qualities: unambiguous,
-  consistent, complete, validatable, abstract and traceable.}
-
-\plt{The overall goal of the SRS is that someone that meets the Characteristics
-  of the Intended Reader (Section~\ref{sec_IntendedReader}) can learn,
-  understand and verify the captured domain knowledge.  They should not have to
-  trust the authors of the SRS on any statements.  They should be able to
-  independently verify/derive every statement made.}
+  
 
 \section{Introduction}
 
-\todo{Discuss: the difficulty of black-box optimization problems}
+Black-box optimization problems deal with objective functions that are unknown, unexploitable, or non-existent\href{https://www.sciencedirect.com/science/article/pii/S2192440621001386}{ \textsuperscript{\textbf{*}}}.
+As evolutionary algorithms lend well to optimizing against black-box objective functions, \thisproject{} seeks to implement an black-box optimizer using evolutionary methods.
 
-Black-box optimization problems deal with objective functions that are unknown, unexploitable, or non-existent\href{https://www.sciencedirect.com/science/article/pii/S2192440621001386}{ \textsuperscript{\textbf{*}}}. Evolutionary algorithms lend well to optimizing against black-box objective functions.
+This introduction includes the following subsections:
+\begin{itemize}
+  \item Purpose of Document: The intent of this doocument
+  \item Scope of requirements: \todo{am I the scope of requirements, or scope of requirements of the project, or scope of this document, which lists the requirements?}
+  \item Characteristics of Intended Reader: Assumptions about the reader, including their knowledge and goals. This document is intended for readers who satisfy these assumptions.
+\end{itemize}
 
-\plt{ followed by a ``roadmap''
-paragraph.  A roadmap orients the reader by telling them what sub-sections to
-expect in the Introduction section.}
+\note{I find it apt to explain these sections in detail. This will be where the reader makes first contact with the document - better make it count! tell the reader that "This document is intended for readers who satisfy these assumptions", so that they do not waste more time than necessary on if they should stay.}
+
 
 \subsection{Purpose of Document}
 
-This document records requirement specifications of \progname{}. It characterises  inputs and outputs of the software, as well as the context in which the software should be deployed. It describes the software in the following parts:
+This document records requirement specifications of \progname{}, in particular the software that should satisfy these requirements. This document elaborates on requirement specifications in the following parts:
+
 \begin{itemize}
   \item Inputs and outputs of the software
-  \item The broader problem, and the goal that the software should be able to solve
-  \item The theoretical founcation of the software
+  \item Assumptions and scope
+  \item Broader problem and refined goals
+  \item Mathematical model and theoretical foundation
 \end{itemize}
 
-The document provides a foundation for development. To this end, it does these things:
-\begin{itemize}
-  \item Scope of the software, which affect design decisions
-  \item Assumptions and constraints that affect design decisions
-  \item Mathematical models of inputs, outputs, and expected behavours, which affect implementation. 
-\end{itemize}
+This document repeats each item on several levels of abstraction. For example, \todo{give example}. 
 
 \subsection{Scope of Requirements} 
+\todo{What am I?}
 
-\todo{what is the input?}
-This project seeks to implement an black-box optimizer using evolutionary algorithms.
+Genomes, in particular variators that operate upon genomes, are costly to implement. As such, \thisproject{} only conisders genomes of real vectors and genetic programs and only implements objective functions from these types.
 
-At this point, the project only considers real-valued objective functions. As a stretch goal, the project also considers higher-order functions of real-valued functions.
+\thisproject{} does not assume the shape of objective functions. As such, \thisproject{} does not guarantee optimality of the result, only that the result performs better than the initial guess.
 
-The program does not guarantee the optimality of solutions it finds.
-
-Furthermore, the program does not accept constraints on possible solutions. The objective function may encode a soft constraint, however.
+\thisproject{} does not allow hard constraints on genome values. However, it should ensure that the result retains the same type, so that the result remains a valid solution.
 
 \subsection{Characteristics of Intended Reader} \label{sec_IntendedReader}
 
-The reader should be proficient in high school levels of mathematics, in particular:
+To understand the mathematical language in this document, the reader should be proficient in high school levels of mathematics, in addition to following items:
 \begin{itemize}
-  \item Types
-  \item Real numbers, functions and functions of real numbers
+  \item Types: Real numbers, functions and functions of real numbers
+  \item Optimization: Objective functions, hyperparameters, and iterative processes
 \end{itemize}
 
-The reader should understand the following concepts about evolutionary computing:
+The reader should understand the subject matter of evolutionary computing, in particular:
 
 \begin{itemize}
   \item Types of values and functions
@@ -287,116 +271,111 @@ The reader should understand the following concepts about evolutionary computing
 \end{itemize}
 
 \subsection{Organization of Document}
+\note{I find the information on "template" distracting. The reader should not care where the document comes from, only what it does.}
 
-This document begins with an overview of its purpose and the purpose of the project. Then, the document describes the problem as well as the softwares that will solve the problem in more detail. The document ends with a mathematical specification of the problem, the system, as well as decisions that motivate earlier parts.
+This document begins with an overview of itself and the system, including (a) the purpose of this document, (b) the scope of requirements \todo{of the project}, and (c) characteristics of the intended reader. Then, this document describes the system in descending levels of abstraction. This document ends with precise, mathematical definitions of the problem, the system, as well as decisions that motivate earlier parts.
+
+In particular, this document divides into the following major sections. These sections describe requirements in descending levels of abstraction.
+
+\hyperref[sec:general]{General System Description}: General information about the system.  It identifies the interfaces between the system and its environment, describes the user characteristics and lists the system constraints.
+
+\hyperref[sec:general]{Specific System Description}: This section first presents the problem description, which gives a high-level
+view of the problem to be solved.  This is followed by the solution characteristics
+specification, which presents the assumptions, theories, definitions and finally
+the instance models.
+
+\hyperref[sec:requirements]{Requirements}: This section provides the functional requirements, the business tasks that the
+software is expected to complete, and the nonfunctional requirements, the
+qualities that the software is expected to exhibit.
 
 \todo{After everything else}
 
 \section{General System Description}
+\label{sec:general}
 
 The program serves two objectives: (a) to optimize real-valued functions, and (b) to optimize higher-order functions.
 
-This section provides general information about the system.  It identifies the interfaces between the system and its environment, describes the user characteristics and lists the system constraints.
-
-
-\plt{This text can likely be
-  borrowed verbatim.}
-
-\plt{The purpose of this section is to provide general information about the
-  system so the specific requirements in the next section will be easier to
-  understand. The general system description section is designed to be
-  changeable independent of changes to the functional requirements documented in
-  the specific system description. The general system description provides a
-  context for a family of related models.  The general description can stay the
-  same, while specific details are changed between family members.}
+\note{I still expereince a degree of .. "narrative whiplash", from the document switching between discussing itself and the project. I propose that I store information on "what the section does" in a small, compact space (such as "Organization of Document"), and leave the rest to describe the system}
 
 \subsection{System Context}
 
-\plt{Your system context will include a figure that shows the abstract view of
-  the software.  Often in a scientific context, the program can be viewed
-  abstractly following the design pattern of Inputs $\rightarrow$ Calculations
-  $\rightarrow$ Outputs.  The system context will therefore often follow this
-  pattern.  The user provides inputs, the system does the calculations, and then
-  provides the outputs to the user.  The figure should not show all of the
-  inputs, just an abstract view of the main categories of inputs (like material
-  properties, geometry, etc.).  Likewise, the outputs should be presented from
-  an abstract point of view.  In some cases the diagram will show other external
-  entities, besides the user.  For instance, when the software product is a
-  library, the user will be another software program, not an actual end user.
-  If there are system constraints that the software must work with external
-  libraries, these libraries can also be shown on the System Context diagram.
-  They should only be named with a specific library name if this is required by
-  the system constraint.}
+The system acts as an optimizer. The system takes (a) an objective function and (b) hyperparameters that instruct the optimization process. The system emits a solution that optimizes the objective function.
 
 \begin{figure}[h!]
 \begin{center}
- \includegraphics[width=0.6\textwidth]{SystemContextFigure}
+ \includegraphics[width=0.8\textwidth]{agolearn}
 \caption{System Context}
 \label{Fig_SystemContext} 
 \end{center}
 \end{figure}
 
-\plt{For each of the entities in the system context diagram its responsibilities
-  should be listed.  Whenever possible the system should check for data quality,
-  but for some cases the user will need to assume that responsibility.  The list
-  of responsibilites should be about the inputs and outputs only, and they
-  should be abstract.  Details should not be presented here.  However, the
-  information should not be so abstract as to just say ``inputs'' and
-  ``outputs''.  A summarizing phrase can be used to characterize the inputs.
-  For instance, saying ``material properties'' provides some information, but it
-  stays away from the detail of listing every required properties.}
-
-\todo {decision is to implement the software as a library}
-
-
+\note{Should I list these responsibilities if the user is... almost abstracted away as "input"? Would it be redundant?}
 
 \begin{itemize}
-\item User Responsibilities:
-\begin{itemize}
-\item Provide correctly typed inputs
-\end{itemize}
-\item \progname{} Responsibilities:
-\begin{itemize}
-\item Detect mistyped inputs
-\item Detect constraint violations of the input
-\item Calculate the required outputs
-\end{itemize}
+  \item User Responsibilities:
+  \begin{itemize}
+  \item Provide correctly typed inputs
+  \end{itemize}
+  \item \progname{} Responsibilities:
+  \begin{itemize}
+  \item Detect mistyped inputs
+  \item Detect constraint violations of the input
+  \item Calculate the required outputs
+  \end{itemize}
 \end{itemize}
 
 \subsection{User Characteristics} \label{SecUserCharacteristics}
 
-The user should be comfortable with programming with floating-point numbers and functions.
+\todo{I think this is a good idea: to separate motivation and ability, or do we only consider capability, assuming that the "motivation" is sufficient. I'm still working on my English.}
+The user should be motivated to, and able to, use \thisproject{}.
 
-The user should be able to use the system as a library. \todo{decision - where does it go?}
+Motivation:
+\begin{itemize}
+  \item The user should seek to optimize a function of real numbers, or a higher-order function.
+\end{itemize}
 
-The user should be aware of common evolutionary operators, and be able to select from a pre-defined list.
+Capability:
+\begin{itemize}
+  \item Familiarity with making function calls to \thisproject{}
+  \item Familiarity with evolutionary operators, and ability to choose operators from a pre-defined catalogue.
+\end{itemize}
 
 \section{Specific System Description}
+\label{specific}
 
-This section first presents the problem description, which gives a high-level
-view of the problem to be solved.  This is followed by the solution characteristics
-specification, which presents the assumptions, theories, definitions and finally
-the instance models.  \plt{Add any project specific details that are relevant
+ \plt{Add any project specific details that are relevant
   for the section overview.}
+
+  \todo{Hard to think of any - that is not appropriate for Problem Description}
 
 \subsection{Problem Description} \label{Sec_pd}
 
-\progname{} intends to solve optimization problems for objective functions that do not follow a particular form.
+Optimization of black-box functions: functions that do not follow a particular form.
+\todo{I find this duplicating Introduction}
 
-\subsubsection{Terminology and  Definitions}
+\subsubsection{Terminology and Definitions}
 
 \todo{move the big boy here}
+\todo{If I assume familiarity of the evolutionary process...}
+\todo{Would it be appropriate to move it to either the beginning or the end, so that it is with other references?}
 
 This subsection provides a list of terms that are used in the subsequent
-sections and their meaning, with the purpose of reducing ambiguity and making it
-easier to correctly understand the requirements:
+sections and their meaning, with the purpose of reducing ambiguity and making it easier to correctly understand the requirements:
 
 \begin{itemize}
-
-\item 
-
+  \item Evolutionary algorithm
+  \item Genetic program
+  \item Genetic programming algorithm
+  \item Evolutionary operators
+  \item Evolutionary operators
+  \item Genome
+  \item Evaluator
+  \item Variator
+  \item Selector
+  \item Parents
+  \item Offspring
+  \item etc.
 \end{itemize}
-
 
 \begin{center}
   \includegraphics[width=0.7\textwidth]{pasta}
@@ -414,9 +393,9 @@ easier to correctly understand the requirements:
 
 \subsubsection{Goal Statements}
 
-For each objective function, the program accepts a population of initial populations. The end population should seek to optimize the objective function.
+\thisproject{} accepts objective function of two types. For each objective funnction, \thisproject{} seeks to produce a genome that optimizes the objective function.
 
-\noindent Given the inputs, the goal statements are:
+\noindent In particular, Given the inputs, the goal statements are:
 
 \begin{itemize}
 
@@ -483,9 +462,8 @@ Subsection~\ref{sec_instance}.  The information to understand the meaning of the
 instance models and their derivation is also presented, so that the instance
 models can be verified.
 
-
-
 \subsection{Scope Decisions}
+\todo{Should I makde the scope decisions more concise, and move the assumptions here? That would "damage the flow", I find.}
 This system only optimizes functions of real numbers, as well as higher-order functions.
 
 An evolutionary algorithm must define a variator for each individual selector. Such variators are costly to implement and it would be difficult to require them as user inputs. The decision is made to restrict representations to two types: vectors of real values and higher-order functions. 
@@ -494,81 +472,19 @@ Consequently, the restriction on the types of solutions restricts the range of i
 
 \subsubsection{Assumptions} \label{sec_assumpt}
 
-To ensure that the result is optimized, the objective function should be consistant. That is, it should involve minimal stochasticy and do not change with time. The system will make no attempt to understand higher-order changes.
+\todo{onlt because there is no rationale for assumptions. I feel that Scopes and Assumptions can reside on the same level, where one is "hard" and the other is "soft". Rationales for Scopes should not be on the same level as Assumptions, if that is the case.}
 
 
-This section simplifies the original problem and helps in developing the
-theoretical model by filling in the missing information for the physical system.
-The numbers given in the square brackets refer to the theoretical model [TM],
-general definition [GD], data definition [DD], instance model [IM], or likely
-change [LC], in which the respective assumption is used.
 
 \begin{itemize}
-
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_meaningfulLabel}:]
-  \plt{Short description of each assumption.  Each assumption
-    should have a meaningful label.  Use cross-references to identify the
-    appropriate traceability to TM, GD, DD etc., using commands like dref, ddref
-    etc.  Each assumption should be atomic - that is, there should not be an
-    explicit (or implicit) ``and'' in the text of an assumption.}
+\item \todo{Should I number assumptions, or give more "expressive names"? I see more expressive names in the given examples.}
+\item This assumption might not lead to implementations: the program will - and I know this because I tried - just be less effective when the assuption does not hold. This assumption is here only so that the "optimizaion" definition holds.
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_NOMOVE}:] To ensure that the result is optimized, the objective function should be 
+consistant. That is, the objective function should involve minimal stochasticy and do not change 
+with time.
 
 \end{itemize}
 
-\subsubsection{Theoretical Models}\label{sec_theoretical}
-
-\plt{Theoretical models are sets of abstract mathematical equations or axioms
-  for solving the problem described in Section ``Physical System Description''
-  (Section~\ref{sec_phySystDescrip}). Examples of theoretical models are
-  physical laws, constitutive equations, relevant conversion factors, etc.}
-
-\plt{Optionally the theory section could be divided into subsections to provide more structure and improve understandability and reusability.  Potential subsections include the following: Context theories, background theories, helper theories, generic theories, problem specific theories, final theories and rationale theories.}
-
-This section focuses on the general equations and laws that \progname{} is based
-on.  \plt{Modify the examples below for your problem, and add additional models
-  as appropriate.}
-
-~\newline
-
-\noindent
-\deftheory
-% #2 refname of theory
-{TM:COE}
-% #3 label
-{Conservation of thermal energy}
-% #4 equation
-{
-  $-{\bf \nabla \cdot q} + g$ = $\rho C \frac{\partial T}{\partial t}$
-}
-% #5 description
-{
-  The above equation gives the conservation of energy for transient heat transfer in a material
-  of specific heat capacity $C$ (\si{\joule\per\kilogram\per\celsius}) and density $\rho$ 
-  (\si{\kilogram\per\cubic\metre}), where $\bf q$ is the thermal flux vector (\si{\watt\per\square\metre}),
-  $g$ is the volumetric heat generation
-  (\si{\watt\per\cubic\metre}), $T$ is the temperature
-  (\si{\celsius}),  $t$ is time (\si{\second}), and $\nabla$ is
-  the gradient operator.  For this equation to apply, other forms
-  of energy, such as mechanical energy, are assumed to be negligible in the
-  system (\aref{A_OnlyThermalEnergy}).  In general, the material properties ($\rho$ and $C$) depend on temperature.
-}
-% #6 Notes
-{
-None.
-}
-% #7 Source
-{
-  \url{http://www.efunda.com/formulae/heat_transfer/conduction/overview_cond.cfm}
-}
-% #8 Referenced by
-{
-  \dref{ROCT}
-}
-% #9 Preconditions
-{
-None
-}
-% #1 derivation - not applicable by default
-{}
 
 \plt{``Ref.\ By'' is used repeatedly with the different types of information.
   This stands for Referenced By.  It means that the models, definitions and
@@ -579,159 +495,6 @@ None
   assumption.  As an example, if TM1 is referenced by GD2, that means that GD2 will
   explicitly include a reference to TM1.}
 
-~\newline
-
-\subsubsection{General Definitions}\label{sec_gendef}
-
-\plt{General Definitions (GDs) are a refinement of one or more TMs, and/or of
-  other GDs.  The GDs are less abstract than the TMs.  Generally the reduction
-  in abstraction is possible through invoking (using/referencing) Assumptions.
-  For instance, the TM could be Newton's Law of Cooling stated abstracting.  The
-  GD could take the general law and apply it to get a 1D equation.}
-
-This section collects the laws and equations that will be used in building the
-instance models.
-
-\plt{Some projects may not have any content for this section, but the section
-  heading should be kept.}  \plt{Modify the examples below for your problem, and
-  add additional definitions as appropriate.}
-
-~\newline
-
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-\hline
-\rowcolor[gray]{0.9}
-Number& GD\refstepcounter{defnum}\thedefnum \label{NL}\\
-\hline
-Label &\bf Newton's law of cooling \\
-\hline
-% Units&$MLt^{-3}T^0$\\
-% \hline
-SI Units&\si{\watt\per\square\metre}\\
-\hline
-Equation&$ q(t) = h \Delta T(t)$  \\
-\hline
-Description &
-Newton's law of cooling describes convective cooling from a surface.  The law is
-stated as: the rate of heat loss from a body is proportional to the difference
-in temperatures between the body and its surroundings.
-\\
-& $q(t)$ is the thermal flux (\si{\watt\per\square\metre}).\\
-& $h$ is the heat transfer coefficient, assumed independent of $T$ (\aref{A_hcoeff})
-	(\si{\watt\per\square\metre\per\celsius}).\\
-&$\Delta T(t)$= $T(t) - T_{\text{env}}(t)$ is the time-dependent thermal gradient
-between the environment and the object (\si{\celsius}).
-\\
-\hline
-  Source & Citation here \\
-  \hline
-  Ref.\ By & \ddref{FluxCoil}, \ddref{FluxPCM}\\
-  \hline
-\end{tabular}
-\end{minipage}\\
-
-\subsubsection*{Detailed derivation of simplified rate of change of temperature}
-
-\plt{This may be necessary when the necessary information does not fit in the
-  description field.}
-\plt{Derivations are important for justifying a given GD.  You want it to be
-  clear where the equation came from.}
-
-\subsubsection{Data Definitions}\label{sec_datadef}
-
-\plt{The Data Definitions are definitions of symbols and equations that are
-  given for the problem.  They are not derived; they are simply used by other
-  models.  For instance, if a problem depends on density, there may be a data
-  definition for the equation defining density.  The DDs are given information
-  that you can use in your other modules.}
-
-\plt{All Data Definitions should be used (referenced) by at least one other
-  model.}
-
-This section collects and defines all the data needed to build the instance
-models. The dimension of each quantity is also given.  \plt{Modify the examples
-  below for your problem, and add additional definitions as appropriate.}
-
-~\newline
-
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-\hline
-\rowcolor[gray]{0.9}
-Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{FluxCoil}\\
-\hline
-Label& \bf Heat flux out of coil\\
-\hline
-Symbol &$q_C$\\
-\hline
-% Units& $Mt^{-3}$\\
-% \hline
-  SI Units & \si{\watt\per\square\metre}\\
-  \hline
-  Equation&$q_C(t) = h_C (T_C - T_W(t))$, over area $A_C$\\
-  \hline
-  Description & 
-                $T_C$ is the temperature of the coil (\si{\celsius}).  $T_W$ is the temperature of the water (\si{\celsius}).  
-                The heat flux out of the coil, $q_C$ (\si{\watt\per\square\metre}), is found by
-                assuming that Newton's Law 
-                of Cooling applies (\aref{A_Newt_coil}).  This law (\dref{NL}) is used on the surface of
-                the coil, which has area $A_C$ (\si{\square\metre}) and heat 
-                transfer coefficient $h_C$
-                (\si{\watt\per\square\metre\per\celsius}).  This equation
-                assumes that the temperature of the coil is constant over time (\aref{A_tcoil}) and that it does not vary along the length
-                of the coil (\aref{A_tlcoil}).
-  \\
-  \hline
-  Sources& Citation here \\
-  \hline
-  Ref.\ By & \iref{ewat}\\
-  \hline
-\end{tabular}
-\end{minipage}\\
-
-\subsubsection{Data Types}\label{sec_datatypes}
-
-\plt{This section is optional.  In many scientific computing programs it isn't
-  necessary, since the inputs and outpus are straightforward types, like reals,
-  integers, and sequences of reals and integers.  However, for some problems it
-  is very helpful to capture the type information.}
-
-\plt{The data types are not derived; they are simply stated and used by other
-  models.}
-
-\plt{All data types must be used by at least one of the models.}
-
-\plt{For the mathematical notation for expressing types, the recommendation is
-  to use the notation of~\citet{HoffmanAndStrooper1995}.}
-
-This section collects and defines all the data types needed to document the
-models. \plt{Modify the examples below for your problem, and add additional
-  definitions as appropriate.}
-
-~\newline
-
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-  \hline
-  \rowcolor[gray]{0.9}
-  Type Name & Name for Type\\
-  \hline
-  Type Def & mathematical definition of the type\\
-  \hline
-  Description & description here
-  \\
-  \hline
-  Sources & Citation here, if the type is borrowed from another source\\
-  \hline
-\end{tabular}
-\end{minipage}\\
 
 \subsubsection{Instance Models} \label{sec_instance}    
 
@@ -741,9 +504,12 @@ models. \plt{Modify the examples below for your problem, and add additional
   GDs.  This section should remain abstract.  The SRS should specify the
   requirements without considering the implementation.}
 
-This section transforms the problem defined in Section~\ref{Sec_pd} into 
+
+  \todo{It is a refinement of the problem, or a refinement of the objective?}
+  
+  This section transforms the problem defined in $Section~Sec_pd$ into 
 one which is expressed in mathematical terms. It uses concrete symbols defined 
-in Section~\ref{sec_datadef} to replace the abstract symbols in the models 
+in Section~ dratadef to replace the abstract symbols in the models 
 identified in Sections~\ref{sec_theoretical} and~\ref{sec_gendef}.
 
 The goals \plt{reference your goals} are solved by \plt{reference your instance
@@ -763,24 +529,13 @@ The goals \plt{reference your goals} are solved by \plt{reference your instance
   \rowcolor[gray]{0.9}
   Number& IM\refstepcounter{instnum}\theinstnum \label{ewat}\\
   \hline
-  Label& \bf Energy balance on water to find $T_W$\\
+  Label& \bf Optimize real-valued functions\\
   \hline
-  Input&$m_W$, $C_W$, $h_C$, $A_C$, $h_P$, $A_P$, $t_\text{final}$, $T_C$, 
-  $T_\text{init}$, $T_P(t)$ from \iref{epcm}\\
-  & The input is constrained so that $T_\text{init} \leq T_C$ (\aref{A_charge})\\
+  Input&$F : \mathbb{R}^n\rightarrow \mathbb{R}$\\
   \hline
-  Output&$T_W(t)$, $0\leq t \leq t_\text{final}$, such that\\
-  &$\frac{dT_W}{dt} = \frac{1}{\tau_W}[(T_C - T_W(t)) + {\eta}(T_P(t) - T_W(t))]$,\\
-  &$T_W(0) = T_P(0) = T_\text{init}$ (\aref{A_InitTemp}) and $T_P(t)$ from \iref{epcm} \\
+  Output&$X : \mathbb{R}$\\
   \hline
-  Description&$T_W$ is the water temperature (\si{\celsius}).\\
-  &$T_P$ is the PCM temperature (\si{\celsius}).\\
-  &$T_C$ is the coil temperature (\si{\celsius}).\\
-  &$\tau_W = \frac{m_W C_W}{h_C A_C}$ is a constant (\si{\second}).\\
-  &$\eta = \frac{h_P A_P}{h_C A_C}$ is a constant (dimensionless).\\
-  & The above equation applies as long as the water is in liquid form,
-  $0<T_W<100^o\text{C}$, where $0^o\text{C}$ and $100^o\text{C}$ are the melting
-  and boiling points of water, respectively (\aref{A_OpRange}, \aref{A_Pressure}).
+  Description&\todo{I don't think the project needs this. }
   \\
   \hline
   Sources& Citation here \\
@@ -792,69 +547,11 @@ The goals \plt{reference your goals} are solved by \plt{reference your instance
 
 %~\newline
 
-\subsubsection*{Derivation of ...}
-
-\plt{The derivation shows how the IM is derived from the TMs/GDs.  In cases
-  where the derivation cannot be described under the Description field, it will
-  be necessary to include this subsection.}
-
-\subsubsection{Input Data Constraints} \label{sec_DataConstraints}    
-
-Table~\ref{TblInputVar} shows the data constraints on the input output
-variables.  The column for physical constraints gives the physical limitations
-on the range of values that can be taken by the variable.  The column for
-software constraints restricts the range of inputs to reasonable values.  The
-software constraints will be helpful in the design stage for picking suitable
-algorithms.  The constraints are conservative, to give the user of the model the
-flexibility to experiment with unusual situations.  The column of typical values
-is intended to provide a feel for a common scenario.  The uncertainty column
-provides an estimate of the confidence with which the physical quantities can be
-measured.  This information would be part of the input if one were performing an
-uncertainty quantification exercise.
-
-The specification parameters in Table~\ref{TblInputVar} are listed in
-Table~\ref{TblSpecParams}.
-
-\begin{table}[!h]
-  \caption{Input Variables} \label{TblInputVar}
-  \renewcommand{\arraystretch}{1.2}
-\noindent \begin{longtable*}{l l l l c} 
-  \toprule
-  \textbf{Var} & \textbf{Physical Constraints} & \textbf{Software Constraints} &
-                             \textbf{Typical Value} & \textbf{Uncertainty}\\
-  \midrule 
-  $L$ & $L > 0$ & $L_{\text{min}} \leq L \leq L_{\text{max}}$ & 1.5 \si[per-mode=symbol] {\metre} & 10\%
-  \\
-  \bottomrule
-\end{longtable*}
-\end{table}
-
-\noindent 
-\begin{description}
-\item[(*)] \plt{you might need to add some notes or clarifications}
-\end{description}
-
-\begin{table}[!h]
-\caption{Specification Parameter Values} \label{TblSpecParams}
-\renewcommand{\arraystretch}{1.2}
-\noindent \begin{longtable*}{l l} 
-  \toprule
-  \textbf{Var} & \textbf{Value} \\
-  \midrule 
-  $L_\text{min}$ & 0.1 \si{\metre}\\
-  \bottomrule
-\end{longtable*}
-\end{table}
-
 \subsubsection{Properties of a Correct Solution} \label{sec_CorrectSolution}
 
 \noindent
-A correct solution must exhibit \plt{fill in the details}.  \plt{These
-  properties are in addition to the stated requirements.  There is no need to
-  repeat the requirements here.  These additional properties may not exist for
-  every problem.  Examples include conservation laws (like conservation of
-  energy or mass) and known constraints on outputs, which are usually summarized
-  in tabular form.  A sample table is shown in Table~\ref{TblOutputVar}}
+\todo {The assumptions, in particular of "the type of the output" and "optimality not guaranteed", as listed in Solution Characteristics Specification, do not need to be replicated.}
+
 
 \begin{table}[!h]
 \caption{Output Variables} \label{TblOutputVar}
@@ -874,13 +571,7 @@ A correct solution must exhibit \plt{fill in the details}.  \plt{These
   plan.}
 
 \section{Requirements}
-
-\plt{The requirements refine the goal statement.  They will make heavy use of
-  references to the instance models.}
-
-This section provides the functional requirements, the business tasks that the
-software is expected to complete, and the nonfunctional requirements, the
-qualities that the software is expected to exhibit.
+\label{sec:requirements}
 
 \subsection{Functional Requirements}
 
