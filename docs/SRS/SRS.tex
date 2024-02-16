@@ -19,8 +19,15 @@
 \usepackage{caption}
 \usepackage{pdflscape}
 \usepackage{afterpage}
+\usepackage{nameref}
+\usepackage{enumitem}
+\usepackage{lipsum}
 
 \usepackage[round]{natbib}
+
+\newlist{firstlinenoindent}{itemize}{1}
+
+\setlist[firstlinenoindent]{itemindent=-\labelwidth}
 
 %\usepackage{refcheck}
 
@@ -60,6 +67,9 @@
 \newcounter{tablenum} %Table Number
 \newcommand{\tbthetablenum}{TB\thetablenum}
 \newcommand{\tbref}[1]{TB\ref{#1}}
+\newcounter{scopnum} %Scope Decision Number
+\newcommand{\athescopnumnum}{S\thescopnum}
+\newcommand{\sref}[1]{S\ref{#1}}
 \newcounter{assumpnum} %Assumption Number
 \newcommand{\atheassumpnum}{A\theassumpnum}
 \newcommand{\aref}[1]{A\ref{#1}}
@@ -78,6 +88,8 @@
 \newcounter{lcnum} %Likely change number
 \newcommand{\lthelcnum}{LC\thelcnum}
 \newcommand{\lcref}[1]{LC\ref{#1}}
+
+\newcommand*{\secref}[1]{\textbf{\hyperref[{#1}]{\ref*{#1} \nameref*{#1}}}}
 
 \usepackage{fullpage}
 
@@ -128,6 +140,7 @@
 }
 
 \begin{document}
+
 
 \title{Software Requirements Specification for \progname: subtitle describing software} 
 \author{\authname}
@@ -193,113 +206,105 @@ This section records information for easy reference.
   \bottomrule
 \end{tabular}\\
 
-\citet{HoffmanAndStrooper1995} This thing has caused me great pain.
-
-\todo{Save for later. List notations that are used in the document.}
+\todo{Add other template citations.}
 
 \newpage
 
 \pagenumbering{arabic}
-
-
-
-\note{
-  A reference document may not need to be read sequentially. For this document, the suggested order is:
-}
-\begin{itemize}
-  \item Goal Statement
-  \item Instance Models
-  \item Requirements
-  \item Introduction
-  \item Specific System Description
-  \end{itemize}
-
-
-  
 
 \section{Introduction}
 
 Black-box optimization problems deal with objective functions that are unknown, unexploitable, or non-existent\href{https://www.sciencedirect.com/science/article/pii/S2192440621001386}{ \textsuperscript{\textbf{*}}}.
 As evolutionary algorithms lend well to optimizing against black-box objective functions, \thisproject{} seeks to implement an black-box optimizer using evolutionary methods.
 
-This introduction includes the following subsections:
+This section includes the following subsections:
 \begin{itemize}
-  \item Purpose of Document: The intent of this doocument
-  \item Scope of requirements: \todo{am I the scope of requirements, or scope of requirements of the project, or scope of this document, which lists the requirements?}
-  \item Characteristics of Intended Reader: Assumptions about the reader, including their knowledge and goals. This document is intended for readers who satisfy these assumptions.
+  
+  \item \secref{subsec:purpose}: Intent of this doocument.
+  \item \secref{subsec:scopep}: Scope of problems that \thisproject{} seeks to address, an abstraction of assumptions.
+  % \item \todo{The scope of the requirement is the scope of the project, in that we use the "faking it" process and are allowed to add requirements retroactively to the documention, so that the document serves as a reference, not just an artifact that we make then forget. So the requirement alwauys coverse the maximum of our knowledge and its scope extends to that of the project}
+  \item \secref{subsec:reader}: Assumptions about the reader, including their knowledge and goals. This document is intended for readers who satisfy these assumptions.
+  \item \secref{subsec:organ}: Major sections of this document following the introduction.
 \end{itemize}
-
-\note{I find it apt to explain these sections in detail. This will be where the reader makes first contact with the document - better make it count! tell the reader that "This document is intended for readers who satisfy these assumptions", so that they do not waste more time than necessary on if they should stay.}
-
 
 \subsection{Purpose of Document}
+\label{subsec:purpose}
 
-This document records requirement specifications of \progname{}, in particular the software that should satisfy these requirements. This document elaborates on requirement specifications in the following parts:
+% There must be a better way to put it.
+This document records requirement specifications of \progname{}, in particular of the software that should satisfy these requirements. This document explains requirement specifications in the folowing parts:
 
+% I find it apt to 
 \begin{itemize}
-  \item Inputs and outputs of the software
-  \item Assumptions and scope
-  \item Broader problem and refined goals
-  \item Mathematical model and theoretical foundation
+  \item Scope and refined assumptions
+  \item Problem and refined goals
+  \item Theoretical foundation and refined models
+  \item Inputs and outputs
+  \item Functional and nonfunctional requirements
 \end{itemize}
 
-This document repeats each item on several levels of abstraction. For example, \todo{give example}. 
+\subsection{Scope of Project} 
+\label{subsec:scopep}
 
-\subsection{Scope of Requirements} 
-\todo{What am I?}
+Genomes, in particular variators that operate upon genomes, are costly to implement. As such, \thisproject{} only implements genomes of real vectors and genetic programs and only implements objective functions from these types. This scope decision refines to \aref{A_TYPE_REAL} and \aref{A_TYPE_HIGHER}
+% Can I say "this scope decision ... refines to ... ?"
+\thisproject{} use evolutionary algorithms, which are iterative, do not guarantee optimality, and do not incorporate hard constraints. This scope decision refines to \aref{A_ONLYEVO}, \aref{A_NOPOT}, \aref{A_ITER}, and \aref{A_NOCON}.
 
-Genomes, in particular variators that operate upon genomes, are costly to implement. As such, \thisproject{} only conisders genomes of real vectors and genetic programs and only implements objective functions from these types.
+\thisproject{} is a library. This assumption removes the need to consider complex user interfaces. This scope decision refines to \aref{A_DAD_IM_A_LIBRARY}.
 
-\thisproject{} does not assume the shape of objective functions. As such, \thisproject{} does not guarantee optimality of the result, only that the result performs better than the initial guess.
+\subsection{Characteristics of Intended Reader} \label
+{sec_IntendedReader}
+\label{subsec:reader}
 
-\thisproject{} does not allow hard constraints on genome values. However, it should ensure that the result retains the same type, so that the result remains a valid solution.
+Readers of this document should have proficiency in at least high school level math\href{https://www.edu.gov.on.ca/eng/curriculum/secondary/math1112currb.pdf}{\textsuperscript{link}}. In addition, readers should be familiar with the following concepts relating to optimization and evolutionary learning:
 
-\subsection{Characteristics of Intended Reader} \label{sec_IntendedReader}
-
-To understand the mathematical language in this document, the reader should be proficient in high school levels of mathematics, in addition to following items:
 \begin{itemize}
-  \item Types: Real numbers, functions and functions of real numbers
   \item Optimization: Objective functions, hyperparameters, and iterative processes
-\end{itemize}
-
-The reader should understand the subject matter of evolutionary computing, in particular:
-
-\begin{itemize}
-  \item Types of values and functions
   \item The balance between quality and novelty
   \item Evolutionary operators: (a) evaluator, (b) variator, (c) selectors, and their roles in the evolutionary process
 \end{itemize}
 
+Familiarity with terminologies defined in \secref{subsubsec:terms} are helpful, but not required to understand this document.
+
 \subsection{Organization of Document}
-\note{I find the information on "template" distracting. The reader should not care where the document comes from, only what it does.}
+\label{subsec:organ}
 
-This document begins with an overview of itself and the system, including (a) the purpose of this document, (b) the scope of requirements \todo{of the project}, and (c) characteristics of the intended reader. Then, this document describes the system in descending levels of abstraction. This document ends with precise, mathematical definitions of the problem, the system, as well as decisions that motivate earlier parts.
+This document begins with an overview of this document and \thisproject, including: (a) the purpose of \thisproject, (b) the scope of \thisproject, and (c) characteristics of the intended reader.
 
-In particular, this document divides into the following major sections. These sections describe requirements in descending levels of abstraction.
+Subsequent sections describes the system in increasing specificity, ending with a mathematical definitions of the system. These sections are:
 
-\hyperref[sec:general]{General System Description}: General information about the system.  It identifies the interfaces between the system and its environment, describes the user characteristics and lists the system constraints.
 
-\hyperref[sec:general]{Specific System Description}: This section first presents the problem description, which gives a high-level
+
+\begin{firstlinenoindent}
+% Descriptions are copied verbatim
+\item[] \secref{sec:general}: General information about the system.  It identifies the interfaces between the system and its environment, describes the user characteristics and lists the system constraints.
+
+\item[] \secref{sec:specific}: This section first presents the problem description, which gives a high-level
 view of the problem to be solved.  This is followed by the solution characteristics
 specification, which presents the assumptions, theories, definitions and finally
 the instance models.
 
-\hyperref[sec:requirements]{Requirements}: This section provides the functional requirements, the business tasks that the
-software is expected to complete, and the nonfunctional requirements, the
-qualities that the software is expected to exhibit.
+\item[] \secref{sec:requirements}: This section provides the functional requirements, the business tasks that the
+software is expected to complete, and the nonfunctional requirements, the qualities that the software is expected to exhibit.
 
-\todo{After everything else}
+\item[] \secref{sec:lchanges} and \secref{sec:uchanges}: These sections document anticipated changes to requirements. This information instructs design and implementation.
+
+% Requirement items?
+\item[] \secref{sec:tracer}: This section connects requirement items in this document. Requirement items include (a) assumptions, (b) goal statements, (c) instance models, (d) functional requirements, (e) nonfunctional requirements, (f) likely changes, and (g) unlikely changes.
+
+\end{firstlinenoindent}
 
 \section{General System Description}
+This section includes the following subsections:
+\begin{itemize}
+  \item \secref{subsec:syscontext}: Abstract interface and responsibilities of the software
+  \item \secref{subsec:userchar}: Characteristics of expected users of the software
+\end{itemize}
 \label{sec:general}
 
-The program serves two objectives: (a) to optimize real-valued functions, and (b) to optimize higher-order functions.
-
-\note{I still expereince a degree of .. "narrative whiplash", from the document switching between discussing itself and the project. I propose that I store information on "what the section does" in a small, compact space (such as "Organization of Document"), and leave the rest to describe the system}
-
 \subsection{System Context}
+\label{subsec:syscontext}
 
-The system acts as an optimizer. The system takes (a) an objective function and (b) hyperparameters that instruct the optimization process. The system emits a solution that optimizes the objective function.
+\thisproject implements an optimizer. As an optimizer, \thisproject takes (a) an objective function and (b) hyperparameters that instruct the optimization process. As an optimizer, \thisproject outputs a solution that optimizes the given objective function. \autoref{Fig_SystemContext} describes the interaction between \thisproject and the user.
 
 \begin{figure}[h!]
 \begin{center}
@@ -309,153 +314,101 @@ The system acts as an optimizer. The system takes (a) an objective function and 
 \end{center}
 \end{figure}
 
-\note{Should I list these responsibilities if the user is... almost abstracted away as "input"? Would it be redundant?}
-
+% In some systems, such as self driving cars,  responsibility extends beyond the sustem. For example, the user is responsible for following GPS navigation instructions to get to the destination.
+Responsibilities of \thisproject and the user are as follows. Appropriate performance of \thisproject to its specification requires that both responsibilties are satisfied.
 \begin{itemize}
-  \item User Responsibilities:
+  \item User Responsibility:
   \begin{itemize}
   \item Provide correctly typed inputs
   \end{itemize}
   \item \progname{} Responsibilities:
   \begin{itemize}
-  \item Detect mistyped inputs
-  \item Detect constraint violations of the input
-  \item Calculate the required outputs
+  \item Detect and report mistyped inputs
+  \item Detect and report constraint violations of the input
+  \item Calculate required outputs
   \end{itemize}
 \end{itemize}
 
 \subsection{User Characteristics} \label{SecUserCharacteristics}
+\label{subsec:userchar}
 
-\todo{I think this is a good idea: to separate motivation and ability, or do we only consider capability, assuming that the "motivation" is sufficient. I'm still working on my English.}
-The user should be motivated to, and able to, use \thisproject{}.
+The intended user of \thisproject{} has the following characteristics:
 
-Motivation:
 \begin{itemize}
-  \item The user should seek to optimize a function of real numbers, or a higher-order function.
-\end{itemize}
-
-Capability:
-\begin{itemize}
-  \item Familiarity with making function calls to \thisproject{}
-  \item Familiarity with evolutionary operators, and ability to choose operators from a pre-defined catalogue.
+  \item Motivation: The user seeks to optimize an objective function of real numbers or functions.
+  \item Capability: The user can make function calls to libraries
+  \item Capability: The user is familiarity with evolutionary operators and can choose from a pre-defined catalogue of operators.
 \end{itemize}
 
 \section{Specific System Description}
-\label{specific}
+\label{sec:specific}
 
- \plt{Add any project specific details that are relevant
-  for the section overview.}
-
-  \todo{Hard to think of any - that is not appropriate for Problem Description}
-
-\subsection{Problem Description} \label{Sec_pd}
-
-Optimization of black-box functions: functions that do not follow a particular form.
-\todo{I find this duplicating Introduction}
-
-\subsubsection{Terminology and Definitions}
-
-\todo{move the big boy here}
-\todo{If I assume familiarity of the evolutionary process...}
-\todo{Would it be appropriate to move it to either the beginning or the end, so that it is with other references?}
-
-This subsection provides a list of terms that are used in the subsequent
-sections and their meaning, with the purpose of reducing ambiguity and making it easier to correctly understand the requirements:
-
+This section includes the following subsections:
 \begin{itemize}
-  \item Evolutionary algorithm
-  \item Genetic program
-  \item Genetic programming algorithm
-  \item Evolutionary operators
-  \item Evolutionary operators
-  \item Genome
-  \item Evaluator
-  \item Variator
-  \item Selector
-  \item Parents
-  \item Offspring
-  \item etc.
+  \item \secref{subsec:problemdesc}: Description and refinements of the problem
+  \item \secref{subsec:solchar}: Characteristics of a good solution, which \thisproject{} should produce
+  \item \secref{subsec:scope}: Scope decisions that affect design and implementation
 \end{itemize}
 
-\begin{center}
-  \includegraphics[width=0.7\textwidth]{pasta}
-\end{center}
 
-% \begin{figure}[h!]
-% \begin{center}
-% %\rotatebox{-90}
-% {
-%  \includegraphics[width=0.5\textwidth]{<FigureName>}
-% }
-% \caption{\label{<Label>} <Caption>}
-% \end{center}
-% \end{figure}
+\subsection{Problem Description} \label{Sec_pd}
+\label{subsec:problemdesc}
+
+% Is this part necessary?
+Optimization of black-box functions: functions that do not follow a particular form.
+
+\subsubsection{Terminology and Definitions}
+\label{subsubsec:terms}
+
+% I consider moving them to earlier - or maybe it's better to move the termonologies that occur before to after this point.
+The following terms are used in subsequent sections:
+
+\begin{itemize}
+  \item Genetic program: A evolutionary algorithm that generates genetic programs
+  \item Genetic programming algorithm: A program that is evolutionarily produced
+  \item Evolutionary operators: Operators that constitute a evolutionary algorithm
+  \item Genome: A representation of a solution
+  \item Evaluator: An evolutionary operator that evaluates the fitness of a genome
+  \item Variator: An evolutionary operator that modifies genomes
+  \item Selector: An evolutionary operator that selects from a pool of genomes
+  \item Parents: A pool of genomes about to undergo variation
+  \item Offspring: The output of a variator
+  \item Fitness: The score of a genome according to the evaluator
+\end{itemize}
+
+
+
+\begin{figure}[h!]
+	\begin{center}
+		%\rotatebox{-90}
+		{
+			\includegraphics[width=0.8\textwidth]{pasta}
+		}
+		\caption{\label{fig:evoalg} Evolutionary Operators and their Positions in an Evolutionary Algorithm}
+	\end{center}
+\end{figure}
+
 
 \subsubsection{Goal Statements}
 
-\thisproject{} accepts objective function of two types. For each objective funnction, \thisproject{} seeks to produce a genome that optimizes the objective function.
+\thisproject{} accepts objective function as evaluators. For each objective funnction, \thisproject{} returns a genome with optimal fitness.
 
 \noindent In particular, Given the inputs, the goal statements are:
 
 \begin{itemize}
 
-\item[GS\refstepcounter{goalnum}\thegoalnum \label{o_reals}:] Optimize against real-valued functions
-\item[GS\refstepcounter{goalnum}\thegoalnum \label{o_h of}:] Optimize against higher-order functions
+\item[GS\refstepcounter{goalnum}\thegoalnum \label{GO_REALS}:] Optimize against real-valued functions
+\item[GS\refstepcounter{goalnum}\thegoalnum \label{GO_HIGHER}:] Optimize against higher-order functions
 
 \end{itemize}
 
 \subsection{Solution Characteristics Specification}
+\label{subsec:solchar}
 
-The system should produce a solution that optimizes the given objective function. The solution should have the same type of the initial population.
+The output of \thisproject{} optimizes the given objective function. The solution should have the same type of the initial population.
 
 The highest score of the output should be greater or equal to that of the initial population.
 
-
-\plt{This section specifies the information in the solution domain of the system
-  to be developed. This section is intended to express what is required in
-  such a way that analysts and stakeholders get a clear picture, and the
-  latter will accept it. The purpose of this section is to reduce the problem
-  into one expressed in mathematical terms. Mathematical expertise is used to
-  extract the essentials from the underlying physical description of the
-  problem, and to collect and substantiate all physical data pertinent to the
-  problem.}
-
-\plt{This section presents the solution characteristics by successively refining
-  models.  It starts with the abstract/general Theoretical Models (TMs) and
-  refines them to the concrete/specific Instance Models (IMs).  If necessary
-  there are intermediate refinements to General Definitions (GDs).  All of these
-  refinements can potentially use Assumptions (A) and Data Definitions (DD).
-  TMs are refined to create new models, that are called GMs or IMs. DDs are not
-  refined; they are just used. GDs and IMs are derived, or refined, from other
-  models. DDs are not derived; they are just given. TMs are also just given, but
-  they are refined, not used.  If a potential DD includes a derivation, then
-  that means it is refining other models, which would make it a GD or an IM.}
-
-\plt{The above makes a distinction between ``refined'' and ``used.'' A model is
-  refined to another model if it is changed by the refinement. When we change a
-  general 3D equation to a 2D equation, we are making a refinement, by applying
-  the assumption that the third dimension does not matter. If we use a
-  definition, like the definition of density, we aren't refining, or changing
-  that definition, we are just using it.}
-
-\plt{The same information can be a TM in one problem and a DD in another.  It is
-  about how the information is used.  In one problem the definition of
-  acceleration can be a TM, in another it would be a DD.}
-
-\plt{There is repetition between the information given in the different chunks
-  (TM, GDs etc) with other information in the document.  For instance, the
-  meaning of the symbols, the units etc are repeated.  This is so that the
-  chunks can stand on their own when being read by a reviewer/user.  It also
-  facilitates reuse of the models in a different context.}
-
-\noindent \plt{The relationships between the parts of the document are show in
-  the following figure.  In this diagram ``may ref'' has the same role as
-  ``uses'' above.  The figure adds ``Likely Changes,'' which are able to
-  reference (use) Assumptions.}
-
-\begin{figure}[H]
-  \includegraphics[scale=0.9]{RelationsBetweenTM_GD_IM_DD_A.pdf}
-\end{figure}
 
 The instance models that govern \progname{} are presented in
 Subsection~\ref{sec_instance}.  The information to understand the meaning of the
@@ -463,84 +416,80 @@ instance models and their derivation is also presented, so that the instance
 models can be verified.
 
 \subsection{Scope Decisions}
-\todo{Should I makde the scope decisions more concise, and move the assumptions here? That would "damage the flow", I find.}
+\label{subsec:scope}
+
+
 This system only optimizes functions of real numbers, as well as higher-order functions.
 
 An evolutionary algorithm must define a variator for each individual selector. Such variators are costly to implement and it would be difficult to require them as user inputs. The decision is made to restrict representations to two types: vectors of real values and higher-order functions. 
 
 Consequently, the restriction on the types of solutions restricts the range of inputs
 
+
 \subsubsection{Assumptions} \label{sec_assumpt}
 
-\todo{onlt because there is no rationale for assumptions. I feel that Scopes and Assumptions can reside on the same level, where one is "hard" and the other is "soft". Rationales for Scopes should not be on the same level as Assumptions, if that is the case.}
-
-
-
 \begin{itemize}
-\item \todo{Should I number assumptions, or give more "expressive names"? I see more expressive names in the given examples.}
-\item This assumption might not lead to implementations: the program will - and I know this because I tried - just be less effective when the assuption does not hold. This assumption is here only so that the "optimizaion" definition holds.
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_NOMOVE}:] To ensure that the result is optimized, the objective function should be 
-consistant. That is, the objective function should involve minimal stochasticy and do not change 
-with time.
+
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_TYPE_REAL}:] The input objective function can be real-valued
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_TYPE_HIGHER}:] The input objective function can be higher-ordered
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_ONLYEVO}:] 
+\thisproject{} implements evolutionary algorithms
+% A better word for "... only implements"?
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_NOPOT}:] \thisproject{} may not output the global optimum of the input objective function.
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_ITER}:] \thisproject{} is an iterative optimizer.
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_NOCON}:] \thisproject{} does not accept explicit constraints.
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_DAD_IM_A_LIBRARY}:] \thisproject{} is a library.
+
 
 \end{itemize}
 
-
-\plt{``Ref.\ By'' is used repeatedly with the different types of information.
-  This stands for Referenced By.  It means that the models, definitions and
-  assumptions listed reference the current model, definition or assumption.
-  This information is given for traceability.  Ref. By provides a pointer in the
-  opposite direction to what we commonly do.  You still need to have a reference
-  in the other direction pointing to the current model, definition or
-  assumption.  As an example, if TM1 is referenced by GD2, that means that GD2 will
-  explicitly include a reference to TM1.}
-
-
 \subsubsection{Instance Models} \label{sec_instance}    
 
-\plt{The motivation for this section is to reduce the problem defined in
-  ``Physical System Description'' (Section~\ref{sec_phySystDescrip}) to one
-  expressed in mathematical terms. The IMs are built by refining the TMs and/or
-  GDs.  This section should remain abstract.  The SRS should specify the
-  requirements without considering the implementation.}
-
-
-  \todo{It is a refinement of the problem, or a refinement of the objective?}
-  
-  This section transforms the problem defined in $Section~Sec_pd$ into 
-one which is expressed in mathematical terms. It uses concrete symbols defined 
-in Section~ dratadef to replace the abstract symbols in the models 
-identified in Sections~\ref{sec_theoretical} and~\ref{sec_gendef}.
-
-The goals \plt{reference your goals} are solved by \plt{reference your instance
-  models}.  \plt{other details, with cross-references where appropriate.}
-\plt{Modify the examples below for your problem, and add additional models as
-  appropriate.}
+The following instance models describe systemss that corresponds to goals.
 
 ~\newline
-
-%Instance Model 1
-
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.5}
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   \hline
   \rowcolor[gray]{0.9}
-  Number& IM\refstepcounter{instnum}\theinstnum \label{ewat}\\
+  Number& IM\refstepcounter{instnum}\theinstnum \label{IM_REALS}\\
   \hline
   Label& \bf Optimize real-valued functions\\
   \hline
   Input&$F : \mathbb{R}^n\rightarrow \mathbb{R}$\\
   \hline
-  Output&$X : \mathbb{R}$\\
+  Output&$X : \mathbb{R}^n$\\
   \hline
-  Description&\todo{I don't think the project needs this. }
+  Description&The system receives a real-valued objective function, then emits a real vector that optimizes the objective function. \\
+  \hline
+  Goal&\gsref{GO_REALS}
   \\
   \hline
-  Sources& Citation here \\
+\end{tabular}
+\end{minipage}\\
+
+~\newline\
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+% I find it useful to move references to the matrix - otherwise the same information is repeated in two places.
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   \hline
-  Ref.\ By & \iref{epcm}\\
+  \rowcolor[gray]{0.9}
+  Number& IM\refstepcounter{instnum}\theinstnum \label{IM_HIGHER}\\
+  \hline
+  Label& \bf Optimize higher-order functions\\
+  \hline
+  Input&$F : (A^n\rightarrow B)\rightarrow \mathbb{R}$\\
+  \hline
+  Output&$X : (A^n\rightarrow B)$\\
+  \hline
+  Description&The system receives a higher-order objective function of functions, then emits a function that optimizes the given objective function.\\
+  \hline
+  Goal&\gsref{GO_HIGHER}
+  \\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -550,136 +499,89 @@ The goals \plt{reference your goals} are solved by \plt{reference your instance
 \subsubsection{Properties of a Correct Solution} \label{sec_CorrectSolution}
 
 \noindent
-\todo {The assumptions, in particular of "the type of the output" and "optimality not guaranteed", as listed in Solution Characteristics Specification, do not need to be replicated.}
 
+The output of \thisproject{} seeks, but not necessarily, optimize the input objective function (\aref{A_NOPOT}).
 
-\begin{table}[!h]
-\caption{Output Variables} \label{TblOutputVar}
-\renewcommand{\arraystretch}{1.2}
-\noindent \begin{longtable*}{l l} 
-  \toprule
-  \textbf{Var} & \textbf{Physical Constraints} \\
-  \midrule 
-  $T_W$ & $T_\text{init} \leq T_W \leq T_C$ (by~\aref{A_charge})
-  \\
-  \bottomrule
-\end{longtable*}
-\end{table}
+Because \thisproject{} is an iterative optimizer (\aref{A_ITER}), the best genome in each generation has a better fitness than the best genome in the last generation.
 
-\plt{This section is not for test cases or techniques for verification and
-  validation.  Those topics will be addressed in the Verification and Validation
-  plan.}
+% This is incredibly verbose.
 
 \section{Requirements}
 \label{sec:requirements}
 
-\subsection{Functional Requirements}
-
-\noindent \begin{itemize}
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:] \plt{Requirements
-    for the inputs that are supplied by the user.  This information has to be
-    explicit.}
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_OutputInputs}:] \plt{It isn't
-    always required, but often echoing the inputs as part of the output is a
-    good idea.}
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Calculate}:] \plt{Calculation
-    related requirements.}
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:]
-  \plt{Verification related requirements.}
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Output}:] \plt{Output related
-    requirements.}
-
+This section includes the following subsections:
+\begin{itemize}
+  \item \secref{subsubsec:freq}: Requirements that make explicit tasks and behaviours the software should complete
+  \item \secref{subsubsec:nfreq}: Requirements that facilitate the satisfaction of functional requirements
+  \item \secref{subsubsec:rationale}: Rationale for scope decisions, modeling decisison, and assumptions
 \end{itemize}
 
-\plt{Every IM should map to at least one requirement, but not every requirement
-  has to map to a corresponding IM.}
+\subsection{Functional Requirements}
+\label{subsubsec:freq}
+\noindent \begin{itemize}
+
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:] Input values should be correctly types
+
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_VALIDATE}:] Input values should be checked. The system should inform the user if input values are incorrect.
+
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:] The output of the system should be able to be given to the evaluation funciton.
+\end{itemize}
 
 \subsection{Nonfunctional Requirements}
+\label{subsubsec:nfreq}
 
-\plt{List your nonfunctional requirements.  You may consider using a fit
-  criterion to make them verifiable.}
-\plt{The goal is for the nonfunctional requirements to be unambiguous, abstract
-  and verifiable.  This isn't easy to show succinctly, so a good strategy may be
-to give a ``high level'' view of the requirement, but allow for the details to
-be covered in the Verification and Validation document.}
-\plt{An absolute requirement on a quality of the system is rarely needed.  For
-  instance, an accuracy of 0.0101 \% is likely fine, even if the requirement is
-  for 0.01 \% accuracy.  Therefore, the emphasis will often be more on
-  describing now well the quality is achieved, through experimentation, and
-  possibly theory, rather than meeting some bar that was defined a priori.}
-\plt{You do not need an entry for correctness in your NFRs.  The purpose of the
-  SRS is to record the requirements that need to be satisfied for correctness.
-  Any statement of correctness would just be redundant. Rather than discuss
-  correctness, you can characterize how far away from the correct (true)
-  solution you are allowed to be.  This is discussed under accuracy.}
 
 \noindent \begin{itemize}
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Accuracy}:]
-  \textbf{Accuracy} \plt{Characterize the accuracy by giving the context/use for
-    the software.  Maybe something like, ``The accuracy of the computed
-    solutions should meet the level needed for $<$engineering or scientific
-    application$>$.  The level of accuracy achieved by \progname{} shall be
-    described following the procedure given in Section~X of the Verification and
-    Validation Plan.''  A link to the VnV plan would be a nice extra.}
+  \textbf{Accuracy} Each iteration of the algorithm should produce a solution whose value, when given to the given objective function, is better than that of the best solution of the previous iteration.
 
-\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Usability}:] \textbf{Usability}
-  \plt{Characterize the usability by giving the context/use for the software.
-    You should likely reference the user characteristics section.  The level of
-    usability achieved by the software shall be described following the
-    procedure given in Section~X of the Verification and Validation Plan.  A
-    link to the VnV plan would be a nice extra.}
+\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Usability-Impl}:] \textbf{Usability-Implementation}
+  The software should be implemented as a library and expose an interface in the form of function calls
+
+  \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Usability}:] \textbf{Usability-Docs}
+  Every public variables, functions, and class should be described.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Maintainability}:]
-  \textbf{Maintainability} \plt{The effort required to make any of the likely
-    changes listed for \progname{} should be less than FRACTION of the original
-    development time.  FRACTION is then a symbolic constant that can be defined
-    at the end of the report.}
+  \textbf{Maintainability} 
+  Implementation of the software should be typed. Where types cannot be inforced, types must be hinted.
 
 \item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Portability}:]
-  \textbf{Portability} \plt{This NFR is easier to write than the others.  The
-    systems that \progname{} should run on should be listed here.  When possible
-    the specific versions of the potential operating environments should be
-    given.  To make the NFR verifiable a statement could be made that the tests
-    from a given section of the VnV plan can be successfully run on all of the
-    possible operating environments.}
-
-\item Other NFRs that might be discussed include verifiability,
-  understandability and reusability.
+  \textbf{Portability} The system should be able to run on Windows 11, up to 024-01 Cumulative Update for Windows 11 Version 22H2 for x64-based Systems (KB5034123)
+  
 
 \end{itemize}
 
 \subsection{Rationale}
+\label{subsubsec:rationale}
 
-\plt{Provide a rationale for the decisions made in the documentation.  Rationale
-should be provided for scope decisions, modelling decisions, assumptions and
-typical values.}
+% Question here
+\todo{Work in progress. My rationales are dispersed throughout the document, there has yet to be rationale that beongs here, I feel.}
 
-\section{Likely Changes}    
+\section{Likely Changes}
+\label{sec:lchanges}
 
 \noindent \begin{itemize}
 
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] \plt{Give
-    the likely changes, with a reference to the related assumption (aref), as appropriate.}
+\item[LC\refstepcounter{lcnum}\thelcnum\label{ULC_meaningfulLabel}:] Change of the selection of evolutionary operators that are implemented.
+\item[LC\refstepcounter{lcnum}\thelcnum\label{ULC_meaningfulLabel}:] Implementation of other types of objective functions.
+\item[LC\refstepcounter{lcnum}\thelcnum\label{ULC_meaningfulLabel}:] Refinement of hyperparameters
 
 \end{itemize}
 
-\section{Unlikely Changes}    
+\section{Unlikely Changes}   
+\label{sec:uchanges} 
 
 \noindent \begin{itemize}
 
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] \plt{Give
-    the unlikely changes.  The design can assume that the changes listed will
-    not occur.}
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] Implement \thisproject with another technology than evolutionary models
+
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] Assurance that the result is a global optimum
 
 \end{itemize}
 
 \section{Traceability Matrices and Graphs}
+\label{sec:tracer}
 
 The purpose of the traceability matrices is to provide easy references on what
 has to be additionally modified if a certain component is changed.  Every time a
@@ -692,43 +594,21 @@ other. Table~\ref{Table:A_trace} shows the dependencies of theoretical models,
 general definitions, data definitions, instance models, and likely changes on
 the assumptions.
 
-\plt{You will have to modify these tables for your problem.}
-
-\plt{The traceability matrix is not generally symmetric.  If GD1 uses A1, that
-  means that GD1's derivation or presentation requires invocation of A1.  A1
-  does not use GD1.  A1 is ``used by'' GD1.}
-
-\plt{The traceability matrix is challenging to maintain manually.  Please do
-  your best.  In the future tools (like Drasil) will make this much easier.}
-
 \afterpage{
 \begin{landscape}
 \begin{table}[h!]
 \centering
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
-	& \aref{A_OnlyThermalEnergy}& \aref{A_hcoeff}& \aref{A_mixed}& \aref{A_tpcm}& \aref{A_const_density}& \aref{A_const_C}& \aref{A_Newt_coil}& \aref{A_tcoil}& \aref{A_tlcoil}& \aref{A_Newt_pcm}& \aref{A_charge}& \aref{A_InitTemp}& \aref{A_OpRangePCM}& \aref{A_OpRange}& \aref{A_htank}& \aref{A_int_heat}& \aref{A_vpcm}& \aref{A_PCM_state}& \aref{A_Pressure} \\
+& \aref{A_TYPE_REAL}
+& \aref{A_TYPE_HIGHER}
+& \aref{A_ONLYEVO}
+& \aref{A_NOPOT}
+& \aref{A_ITER}
+& \aref{A_NOCON}
+& \aref{A_DAD_IM_A_LIBRARY} \\
 \hline
-\tref{T_COE}        & X& & & & & & & & & & & & & & & & & & \\ \hline
-\tref{T_SHE}        & & & & & & & & & & & & & & & & & & & \\ \hline
-\tref{T_LHE}        & & & & & & & & & & & & & & & & & & & \\ \hline
-\dref{NL}           & & X& & & & & & & & & & & & & & & & & \\ \hline
-\dref{ROCT}         & & & X& X& X& X& & & & & & & & & & & & & \\ \hline
-\ddref{FluxCoil}    & & & & & & & X& X& X& & & & & & & & & & \\ \hline
-\ddref{FluxPCM}     & & & X& X& & & & & & X& & & & & & & & & \\ \hline
-\ddref{D_HOF}       & & & & & & & & & & & & & & & & & & & \\ \hline
-\ddref{D_MF}        & & & & & & & & & & & & & & & & & & & \\ \hline
-\iref{ewat}         & & & & & & & & & & & X& X& & X& X& X& & & X \\ \hline
-\iref{epcm}         & & & & & & & & & & & & X& X& & & X& X& X& \\ \hline
-\iref{I_HWAT}       & & & & & & & & & & & & & & X& & & & & X \\ \hline
-\iref{I_HPCM}       & & & & & & & & & & & & & X& & & & & X & \\ \hline
-\lcref{LC_tpcm}     & & & & X& & & & & & & & & & & & & & & \\ \hline
-\lcref{LC_tcoil}    & & & & & & & & X& & & & & & & & & & & \\ \hline
-\lcref{LC_tlcoil}   & & & & & & & & & X& & & & & & & & & & \\ \hline
-\lcref{LC_charge}   & & & & & & & & & & & X& & & & & & & & \\ \hline
-\lcref{LC_InitTemp} & & & & & & & & & & & & X& & & & & & & \\ \hline
-\lcref{LC_htank}    & & & & & & & & & & & & & & & X& & & & \\
-\hline
+\tref{T_COE}        & X& & & & & & \\ 
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Assumptions and Other Items}
 \label{Table:A_trace}
@@ -740,21 +620,10 @@ the assumptions.
 \centering
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline        
-	& \tref{T_COE}& \tref{T_SHE}& \tref{T_LHE}& \dref{NL}& \dref{ROCT} & \ddref{FluxCoil}& \ddref{FluxPCM} & \ddref{D_HOF}& \ddref{D_MF}& \iref{ewat}& \iref{epcm}& \iref{I_HWAT}& \iref{I_HPCM} \\
+	& \tref{T_COE}& \tref{T_SHE}\\
 \hline
-\tref{T_COE}     & & & & & & & & & & & & & \\ \hline
-\tref{T_SHE}     & & & X& & & & & & & & & & \\ \hline
-\tref{T_LHE}     & & & & & & & & & & & & & \\ \hline
-\dref{NL}        & & & & & & & & & & & & & \\ \hline
-\dref{ROCT}      & X& & & & & & & & & & & & \\ \hline
-\ddref{FluxCoil} & & & & X& & & & & & & & & \\ \hline
-\ddref{FluxPCM}  & & & & X& & & & & & & & & \\ \hline
-\ddref{D_HOF}    & & & & & & & & & & & & & \\ \hline
-\ddref{D_MF}     & & & & & & & & X& & & & & \\ \hline
-\iref{ewat}      & & & & & X& X& X& & & & X& & \\ \hline
-\iref{epcm}      & & & & & X& & X& & X& X& & & X \\ \hline
-\iref{I_HWAT}    & & X& & & & & & & & & & & \\ \hline
-\iref{I_HPCM}    & & X& X& & & & X& X& X& & X& & \\
+\tref{T_COE}     & & \\ \hline
+\tref{T_SHE}     & & \\
 \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Items of Different Sections}
@@ -765,23 +634,10 @@ the assumptions.
 \centering
 \begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline
-	& \iref{ewat}& \iref{epcm}& \iref{I_HWAT}& \iref{I_HPCM}& \ref{sec_DataConstraints}& \rref{R_RawInputs}& \rref{R_MassInputs} \\
+	& \iref{ewat}& \iref{epcm}\\
 \hline
-\iref{ewat}            & & X& & & & X& X \\ \hline
-\iref{epcm}            & X& & & X& & X& X \\ \hline
-\iref{I_HWAT}          & & & & & & X& X \\ \hline
-\iref{I_HPCM}          & & X& & & & X& X \\ \hline
-\rref{R_RawInputs}     & & & & & & & \\ \hline
-\rref{R_MassInputs}    & & & & & & X& \\ \hline
-\rref{R_CheckInputs}   & & & & & X& & \\ \hline
-\rref{R_OutputInputs}  & X& X& & & & X& X \\ \hline
-\rref{R_TempWater}     & X& & & & & & \\ \hline 
-\rref{R_TempPCM}       & & X& & & & & \\ \hline
-\rref{R_EnergyWater}   & & & X& & & & \\ \hline
-\rref{R_EnergyPCM}     & & & & X& & & \\ \hline
-\rref{R_VerifyOutput}  & & & X& X& & & \\ \hline
-\rref{R_timeMeltBegin} & & X& & & & & \\ \hline
-\rref{R_timeMeltEnd}   & & X& & & & & \\ 
+\ref{ewat}            & & \\ \hline
+\ref{epcm}            & X& \\
 \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Requirements and Instance Models}
@@ -821,22 +677,12 @@ instance models, requirements, and data constraints on each other.
 
 \section{Development Plan}
 
-\plt{This section is optional.  It is used to explain the plan for developing
-  the software.  In particular, this section gives a list of the order in which
-  the requirements will be implemented.  In the context of a course  this is
-  where you can indicate which requirements will be implemented as part of the
-  course, and which will be ``faked'' as future work.  This section can be
-  organized as a prioritized list of requirements, or it could should the
-  requirements that will be implemented for ``phase 1'', ``phase 2'', etc.}
+\todo{Leave for later, may be useful.}
 
 \section{Values of Auxiliary Constants}
 
-\plt{Show the values of the symbolic parameters introduced in the report.}
+\todo{Leave for later, may be useful.}
 
-\plt{The definition of the requirements will likely call for SYMBOLIC\_CONSTANTS.
-Their values are defined in this section for easy maintenance.}
-
-\plt{The value of FRACTION, for the Maintainability NFR would be given here.}
 
 \newpage
 
@@ -887,4 +733,5 @@ Their values are defined in this section for easy maintenance.}
 
 \newpage{}
 
+Template sources: \citet{HoffmanAndStrooper1995}
 \end{document}
