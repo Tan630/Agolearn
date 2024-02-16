@@ -36,6 +36,7 @@
     \item Resolve TODO item on adding references
 \end{enumerate}
 \\
+2024-01-15 & Yiding Li & Return \textbf{Motivation} to \textbf{Problem}: describe "what it does", not "what it is".\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -49,11 +50,9 @@
 
 \subsection{Motivation}
 
+This project seeks to implement an evolutionary optimizer for arbtrary real-valued functions and higher-ordered functions.
 
-\hyperref[sec:evalg]{Evolutionary algorithms} lend well to solving novel problems that are difficult to model or solve by traditional means. \hyperref[sec:genalg]{Genetic programming algorithms}, in particular, are able to evolve programs that perform well against arbitrary objective functions.
-
-While evolutionary methods lack the efficiency of traditonal optimization methods (such as simplex algorithms and gradient desgent algorithms), they work in more complex environments (such as moving constraints, moving optimization functions, partially observable environments, and objective functions that do not have well-defined derivatives). This project seeks to develop an optimizer that takes advantage of these features.
-
+While \hyperref[sec:evalg]{evolutionary algorithms} lack the efficiency of traditional optimization algorithms, they lend well to solving poorly understood, dynamic, or black-box problems. As such, usage of evolutionary algorithms is key to imeplemting this project. \hyperref[sec:genalg]{Generic programming algorithms}, in particular, make it possible to build functions that optimize higher-order functions.
 
 \begin{figure}[h]
     \caption{Input and output of a genetic programming algorithm}
@@ -63,26 +62,26 @@ While evolutionary methods lack the efficiency of traditonal optimization method
 
 \subsection{Inputs and Outputs}
 
-Input: 
+
 \subsubsection{Optimizing real-valued functions}
+\textbf{Input}:
 \begin{enumerate}
-    \item A real-valued function
-    \item Parameters that control the evolutionary process. Examples are: (a) choices of evolutoinary operators, (b) number of episodes, and (c) the length of each episode or truncation conditions
+    \item A real-valued function.
+    \item Parameters that control the evolutionary process. Examples are: (a) choices of evolutoinary operators, (b) number of episodes, and (c) the length of each episode or truncation conditions.
 \end{enumerate}
+\textbf{Output}: A real vector that optimizes the given real-valued function.
 
 \subsubsection{Optimizing higher-ordered functions}
+\textbf{Input}:
 \begin{enumerate}
-    \item A higher-order function
-    \item Parameters that control how solutions are generated. Examples are: (a) node functions, (b) tree depth, and (c) node count
-    \item Parameters that control the evolutionary process. Examples are: (a) choices of evolutoinary operators, (b) number of episodes, and (c) the length of each episode or truncation conditions
+    \item A higher-order function.
+    \item Parameters that control how solutions are generated. Examples are: (a) node functions, (b) tree depth, and (c) node count.
+    \item Parameters that control the evolutionary process. Examples are: (a) choices of evolutoinary operators, (b) number of episodes, and (c) the length of each episode or truncation conditions.
 \end{enumerate}
-
-
-Output: A value or genetic program that optimizes the given objective function
-
+\textbf{Output}: A function that optimizes the given higher-order function.
 
 \subsection{Stakeholders}
-This project is designed for anyone who seeks to optimize against an objective function. In particular, it is able to optimize against black-box or stochastic functions where traditonal optimization methods fail.
+This project can be used by anyone who seeks to optimize an objective function. It should be especially suited for derivative-free functions.
 
 \section{Goals}
 \begin{itemize}
@@ -118,9 +117,9 @@ This project is designed for anyone who seeks to optimize against an objective f
     \centering
 \end{figure}
 
-\subsection{Genetic Algorithms}
+\subsection{Genetic Programming}
 \label{sec:genalg}
-\textbf{Genetic algorithms} (\textbf{GA}) are evolutionary algorithms that work with programs. That is, such algorithms evolve \textit{functions} against an objective function that receive functions. Genetic algorithms can evolve agents that behave well in a particular environment (e.g. \href{https://www.mdpi.com/2227-7390/11/13/2931}{a bipedal walker}) or construct mathematical models (e.g. \href{https://link.springer.com/article/10.1007/s11831-023-09922-z}{symbolic regression})
+\textbf{Genetic programming} (\textbf{GA}) algorithms are evolutionary algorithms that evolve with programs. That is, such algorithms evolve \textit{functions} against an higher-order objective function that takes functions as input. Genetic algorithms can evolve agents that behave well in a particular environment (e.g. \href{https://www.mdpi.com/2227-7390/11/13/2931}{a bipedal walker}) or construct mathematical models (e.g. \href{https://link.springer.com/article/10.1007/s11831-023-09922-z}{symbolic regression})
 
 
 
