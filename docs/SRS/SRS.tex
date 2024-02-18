@@ -32,8 +32,8 @@
 %\usepackage{refcheck}
 
 \hypersetup{
-    bookmarks=true,         % show bookmarks bar?
-      colorlinks=true,       % false: boxed links; true: colored links
+    %bookmarks=true,         % show bookmarks bar? somehow this line gives an warning.
+    colorlinks=true,       % false: boxed links; true: colored links
     linkcolor=red,          % color of internal links (change box color with linkbordercolor)
     citecolor=green,        % color of links to bibliography
     filecolor=magenta,      % color of file links
@@ -305,7 +305,6 @@ This section includes the following subsections:
 \label{subsec:syscontext}
 
 \thisproject implements an optimizer. As an optimizer, \thisproject takes (a) an objective function and (b) hyper-parameters that instruct the optimization process. As an optimizer, \thisproject outputs a solution that optimizes the given objective function. \autoref{Fig_SystemContext} describes the interaction between \thisproject and the user.
-
 \begin{figure}[h!]
 \begin{center}
  \includegraphics[width=0.8\textwidth]{agolearn}
@@ -379,7 +378,7 @@ The subsequent sections use the following terms. Definitions are given according
 
 
 
-\begin{figure}[h!]
+\begin{figure}[ht]
 	\begin{center}
 		%\rotatebox{-90}
 		{
@@ -602,7 +601,7 @@ the assumptions.
 
 
 
-\begin{landscape}
+
 \begin{table}[h!]
 \centering
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
@@ -646,6 +645,7 @@ the assumptions.
   \label{Table:R_trace}
   \end{table}
 
+  
   \begin{figure}[h!]
     \begin{center}
       {
@@ -656,22 +656,7 @@ the assumptions.
     \end{center}
   \end{figure}
 
-\end{landscape}
 }
-
-% \begin{table}[h!]
-% \centering
-% \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-% \hline        
-% 	& \tref{T_COE}& \tref{T_SHE}\\
-% \hline
-% \tref{T_COE}     & & \\ \hline
-% \tref{T_SHE}     & & \\
-% \hline
-% \end{tabular}
-% \caption{Traceability Matrix Showing the Connections Between Items of Different Sections}
-% \label{Table:trace}
-% \end{table}
 
 The purpose of the traceability graphs is also to provide easy references on
 what has to be additionally modified if a certain component is changed.  The
@@ -680,42 +665,9 @@ arrow is depended on by the component at the head of that arrow. Therefore, if a
 component is changed, the components that it points to should also be
 changed. 
 
-
-
-% I do not have these things
-%Figure~\ref{Fig_ATrace} shows the dependencies of theoretical models,
-% general definitions, data definitions, instance models, likely changes, and
-% assumptions on each other. Figure~\ref{Fig_RTrace} shows the dependencies of
-% instance models, requirements, and data constraints on each other.
-
-% \begin{figure}[h!]
-% 	\begin{center}
-% 		%\rotatebox{-90}
-% 		{
-% 			\includegraphics[width=\textwidth]{ATrace.png}
-% 		}
-% 		\caption{\label{Fig_ATrace} Traceability Matrix Showing the Connections Between Items of Different Sections}
-% 	\end{center}
-% \end{figure}
-
-
-
-
-
-
-
-
-
-
-
-
 \section{Development Plan}
 
 Develop an abstract framework that represents the evolutionary process, then craft instances of these operators.
-
-\section{Values of Auxiliary Constants}
-
-\note{None at the moment}
 
 
 \newpage
