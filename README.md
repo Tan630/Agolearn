@@ -59,27 +59,8 @@ The folders and files for this project are as follows:
 - [ ] Implement: optimizer for higher-order functions
 
 ## Contributing
-Please also reference <a href="./CONTRIBUTE.md">CONTRIBUTE.md</a>
-### Commit Format
+Please reference <a href="./CONTRIBUTING.md">CONTRIBUTING.md</a>
 
-Write commit messages according to the following guidelines:
-
-* Always write commit messages in the present tense, the active voice, and the imperative mood
-* Always write concise, title-only commit messages.
-* Never punctuate the end of titles
-
-Prefix commit messages with one of the following labels:
-
-|Label|Meaning|
-|-|--------|
-|Feature:| Add or remove a feature.|
-|Fix:| Fix a problem that affects the satisfaction of a requirement, or the implementation of a feature. |
-|Style:| Changes that improve readability.|
-|Performance: | Changes that improve space or time complexity.|
-|Doc: | Adding, changing, or removing documentation.|
-|Test: | Adding, changing, or removing test cases.|
-|Git: | Operations that relate to `git`, such as resolving merge conflicts and rewriting commit messages.|
-|Meta: | Modify code structure, manage dependencies, update versions, etc. |
 
 ### Licence
 See `licenses/` for licenses for components of this project.
