@@ -1,0 +1,16 @@
+@startebnf
+skinparam defaultfontname "Open Sans"
+comment = (("Accept" | "Resolve"), 
+        ["in part"], ["with", modifiers]
+    | "Reject", reason
+    | "Comment", message);
+
+modifiers = modifier, {",", modifier};
+
+modifier = (
+        "priority"
+        | "future action(s)"
+        | "pending change(s)"
+        | "modification(s)");
+
+@endebnf

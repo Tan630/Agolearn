@@ -38,29 +38,25 @@ Write issues that are concise, informative, and actionable:
 
 ## Process
 
-Close issues with comment. Write issue comments in the following form:
+### Issue Resolution
+Resolve issues using the following syntax.
 
-```
-<type>[<modifier>].
 
-<comment> 
-```
+![](media/main-issue-format.svg)
 
-The following table lists values for `<type>`:
-|Type|Meaning|
-|-|--------|
-|Accept||
-|Reject||
 
-The following table lists values for <modifier>:
-|Modifier|Meaning|
-|-|--------|
-|In part||
-|With future action||
-|Pending change (#issue)||
+### Commits for Issues
+In commits that address a particular issue, reference that issue. When closing an issue, reference all commits that reference that issue.
 
-Close child issues with comment. Write issue comments for child issues in the following form:
-||
+![](media/issue-in-commit.svg)
 
+### Child Issues
+Modifiers `future action` and `pending change` create child issues. Write child issues in reference to the parent.
+
+![](media/issue-child.svg)
+
+The workflow for spawning and closing child issues is as follows. Note to use `Resolve` and not `Accept`, since child issues are created by developers.
+
+![](media/issue-resolution-process.svg)
 
 ### Link Pull Requests
