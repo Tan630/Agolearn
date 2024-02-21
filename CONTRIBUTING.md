@@ -5,9 +5,9 @@
 
 Write commit messages according to the following guidelines:
 
-* Always write commit messages in the present tense, the active voice, and the imperative mood
+* Write in the present tense, the active voice, and the imperative mood.
 * Always write concise, title-only commit messages.
-* Never punctuate the end of titles
+* Never punctuate the end of titles.
 
 ## Prefixes
 
@@ -15,18 +15,18 @@ Prefix commit messages with one of the following labels:
 
 |Label|Meaning|
 |-|--------|
-|Feature:| Add or remove a feature.|
-|Fix:| Fix a problem that affects the satisfaction of a requirement, or the implementation of a feature. |
-|Style:| Changes that improve readability.|
-|Performance: | Changes that improve space or time complexity.|
-|Doc: | Adding, changing, or removing documentation.|
-|Test: | Adding, changing, or removing test cases.|
-|Git: | Operations that relate to `git`, such as resolving merge conflicts and rewriting commit messages.|
-|Meta: | Modify code structure, manage dependencies, update versions, etc. |
+|`Feature:`| Add or remove a feature.|
+|`Fix:`| Fix a problem that affects the satisfaction of a requirement, or the implementation of a feature. |
+|`Style:`| Changes that improve readability.|
+|`Performance:`| Changes that improve space or time complexity.|
+|`Doc`: | Adding, changing, or removing documentation.|
+|`Test`: | Adding, changing, or removing test cases.|
+|`Git`: | Operations that relate to `git`, such as resolving merge conflicts and rewriting commit messages.|
+|`Meta`: | Modify code structure, manage dependencies, update versions, etc. |
 
 # Issues
 
-## Writing Style
+## Writing Issues
 
 Write issues that are concise, informative, and actionable:
 
@@ -36,11 +36,20 @@ Write issues that are concise, informative, and actionable:
 
 **Actionable** issues provide information on how to solve the problem.
 
-## Process
+## Resolving Issues
 
-### Issue Resolution
-Resolve issues using the following syntax.
+### Comment
 
+Start issue comments with one of the following types:
+
+|Comment Type|Meaning|
+|-|--------|
+|Accept|Acceptance of an external issue|
+|Reject|Rejection of an external issue|
+|Resolve|Resolution of an internal issue|
+|Comment|Comment does not resolve the issue|
+	
+Following the type, note actions after acceptance (or resolution) and reasons for rejection, according to the following syntax:
 
 ![](media/main-issue-format.svg)
 
@@ -58,5 +67,3 @@ Modifiers `future action` and `pending change` create child issues. Write child 
 The workflow for spawning and closing child issues is as follows. Note to use `Resolve` and not `Accept`, since child issues are created by developers.
 
 ![](media/issue-resolution-process.svg)
-
-### Link Pull Requests
