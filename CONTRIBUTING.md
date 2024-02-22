@@ -15,14 +15,14 @@ Prefix commit messages with one of the following labels.
 
 |Label|Action|
 |-|--------|
-|`doc`: | Add, remove, or change documentation |
-|`feat:`| Add or remove a feature|
-|`fix:`| Fix a problem in code |
-|`style:`| Improve code readability |
-|`perf:`| Improve code performance |
-|`test`: | Add, remove, or change test cases |
-|`git`: | Deal with Git shenanigans |
-|`build`: | Change build system, change external dependencies |
+|doc: | Add, remove, or change documentation |
+|feat:| Add or remove a feature|
+|fix:| Fix a problem in code |
+|style:| Improve code readability |
+|perf:| Improve code performance |
+|test: | Add, remove, or change test cases |
+|git: | Deal with Git shenanigans |
+|build: | Change build system, change external dependencies |
 
 Optionally, suffix the label with the component that is changed.
 
