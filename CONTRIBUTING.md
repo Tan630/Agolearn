@@ -16,10 +16,10 @@ Prefix commit messages with one of the following labels.
 |Label|Action|
 |-|--------|
 |`doc`: | Add, remove, or change documentation |
-|`feature:`| Add or remove a feature|
+|`feat:`| Add or remove a feature|
 |`fix:`| Fix a problem in code |
 |`style:`| Improve code readability |
-|`performance:`| Improve code performance |
+|`perf:`| Improve code performance |
 |`test`: | Add, remove, or change test cases |
 |`git`: | Deal with Git shenanigans |
 |`build`: | Change build system, change external dependencies |
