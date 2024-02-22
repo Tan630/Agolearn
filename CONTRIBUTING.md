@@ -20,6 +20,7 @@ Prefix commit messages with one of the following labels.
 |fix:| Fix a problem in code |
 |style:| Improve code readability |
 |perf:| Improve code performance |
+|code: | Other types of change in code |
 |test: | Add, remove, or change test cases |
 |git: | Deal with Git shenanigans |
 |build: | Change build system, change external dependencies |
