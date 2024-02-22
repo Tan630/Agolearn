@@ -48,6 +48,8 @@ The folders and files for this project are as follows:
 
 * `licenses/` - Licenses of components
 
+* `media/` - Media files
+
 ## Roadmap
 
 - [x] Add component licenses
