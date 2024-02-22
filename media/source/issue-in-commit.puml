@@ -1,4 +1,5 @@
 @startebnf
+skinparam defaultfontname "Open Sans"
 commit-for-issue = Prefix, "(", issue, "):", change;
 in-commit = "In commit", "(", commit, "):", ("address proposed problem" | "apply proposed solution" | ?other reasons?);
 @endebnf
