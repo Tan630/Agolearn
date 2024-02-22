@@ -11,18 +11,28 @@ Write commit messages according to the following guidelines:
 
 ## Prefixes
 
-Prefix commit messages with one of the following labels:
+Prefix commit messages with one of the following labels.
 
-|Label|Meaning|
+|Label|Action|
 |-|--------|
-|`Feature:`| Add or remove a feature.|
-|`Fix:`| Fix a problem that affects the satisfaction of a requirement, or the implementation of a feature. |
-|`Style:`| Changes that improve readability.|
-|`Performance:`| Changes that improve space or time complexity.|
-|`Doc`: | Adding, changing, or removing documentation.|
-|`Test`: | Adding, changing, or removing test cases.|
-|`Git`: | Operations that relate to `git`, such as resolving merge conflicts and rewriting commit messages.|
-|`Meta`: | Modify code structure, manage dependencies, update versions, etc. |
+|`doc`: | Add, remove, or change documentation |
+|`feature:`| Add or remove a feature|
+|`fix:`| Fix a problem in code |
+|`style:`| Improve code readability |
+|`performance:`| Improve code performance |
+|`test`: | Add, remove, or change test cases |
+|`git`: | Deal with Git shenanigans |
+|`build`: | Change build system, change external dependencies |
+
+Optionally, suffix the label with the component that is changed.
+
+Optionally, suffix the label with an issue ID.
+
+
+![](media/commit-style.svg)
+
+
+[[1]](#references)
 
 # Issues
 
@@ -53,7 +63,6 @@ Following the type, note actions after acceptance (or resolution) and reasons fo
 
 ![](media/main-issue-format.svg)
 
-
 ### Commits for Issues
 In commits that address a particular issue, reference that issue. When closing an issue, reference all commits that reference that issue.
 
@@ -67,3 +76,7 @@ Modifiers `future action` and `pending change` create child issues. Write child 
 The workflow for spawning and closing child issues is as follows. Note to use `Resolve` and not `Accept`, since child issues are created by developers.
 
 ![](media/issue-resolution-process.svg)
+
+
+# References
+[1] Developed in reference to [Contributing to Angular](https://github.com/angular/angular/blob/main/CONTRIBUTING.md)
