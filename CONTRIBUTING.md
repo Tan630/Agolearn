@@ -64,7 +64,9 @@ Following the type, note actions after acceptance (or resolution) and reasons fo
 ![](media/main-issue-format.svg)
 
 ### Commits for Issues
-In commits that address a particular issue, reference that issue. When closing an issue, reference all commits that reference that issue.
+In commits that address an issue, reference that issue.
+
+In comments that close an issue, reference all commits that reference that issue.
 
 ![](media/issue-in-commit.svg)
 
