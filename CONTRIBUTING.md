@@ -71,7 +71,9 @@ In comments that close an issue, reference all commits that reference that issue
 ![](media/issue-in-commit.svg)
 
 ### Child Issues
-Modifiers `future action` and `pending change` create child issues. Write child issues in reference to the parent.
+Before closing issues with modifiers `future action` and `pending change`, create child issues that discuss the appropriate action or change. Then, reference these child issues.
+
+In each child issue that is created this way, reference the parent issue.
 
 ![](media/issue-child.svg)
 
