@@ -1,4 +1,4 @@
 @startebnf
 skinparam defaultfontname "Open Sans"
-commit = ("doc" | "feature" | "fix" | "style" | "performance" | "test" | "git" | "build"), ["(", component,")"], ["[", issue, "]"], change;
+commit = ("doc" | "feat" | "fix" | "style" | "perf" | "code" | "structure" | "test" | "git" | "build"), ["(", component,")"], ["[", issue, "]"], change;
 @endebnf
