@@ -21,6 +21,7 @@ Prefix commit messages with one of the following labels.
 |style:| Improve code readability |
 |perf:| Improve code performance |
 |code: | Other types of change in code |
+|struct: | Other types of change in code that affect file structure |
 |test: | Add, remove, or change test cases |
 |git: | Deal with Git shenanigans |
 |build: | Change build system, change external dependencies |
