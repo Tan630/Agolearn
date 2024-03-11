@@ -1,14 +1,24 @@
 \documentclass[12pt, titlepage]{article}
-
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{12pt}
+\linespread{1.2}
+\usepackage{caption} 
+\captionsetup[table]{skip=10pt}
+\hfuzz=900.002pt 
+\hbadness=99999
+\usepackage{amsmath}
 \usepackage{booktabs}
+\usepackage{algorithm2e}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{amsfonts}
+\usepackage{changepage}
 \hypersetup{
-    colorlinks,
-    citecolor=blue,
-    filecolor=black,
-    linkcolor=red,
-    urlcolor=blue
+colorlinks,
+citecolor=blue,
+filecolor=black,
+linkcolor=red,
+urlcolor=blue
 }
 \usepackage[round]{natbib}
 
@@ -20,7 +30,7 @@
 \title{Project Title: System Verification and Validation Plan for \progname{}} 
 \author{\authname}
 \date{\today}
-	
+
 \maketitle
 
 \pagenumbering{roman}
@@ -28,27 +38,14 @@
 \section*{Revision History}
 
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
-\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
-\midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
-\bottomrule
+  \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+  \midrule
+  2024-02-29 & 1.0 & First Draft\\
+  2024-03-11 & 1.1 & Transcription to latex\\
+  \bottomrule
 \end{tabularx}
 
 ~\\
-\wss{The intention of the VnV plan is to increase confidence in the software.
-However, this does not mean listing every verification and validation technique
-that has ever been devised.  The VnV plan should also be a \textbf{feasible}
-plan. Execution of the plan should be possible with the time and team available.
-If the full plan cannot be completed during the time available, it can either be
-modified to ``fake it'', or a better solution is to add a section describing
-what work has been completed and what work is still planned for the future.}
-
-\wss{The VnV plan is typically started after the requirements stage, but before
-the design stage.  This means that the sections related to unit testing cannot
-initially be completed.  The sections will be filled in after the design stage
-is complete.  the final version of the VnV plan should have all sections filled
-in.}
 
 \newpage
 
@@ -69,12 +66,15 @@ in.}
   \toprule		
   \textbf{symbol} & \textbf{description}\\
   \midrule 
-  T & Test\\
+  SRS & Software requirements specification\\
+  VNV & Verification and validation\\
+  Module guide\\
+  MIS & Module interface specification\\
   \bottomrule
 \end{tabular}\\
 
 \wss{symbols, abbreviations, or acronyms --- you can simply reference the SRS
-  \citep{SRS} tables, if appropriate}
+\citep{SRS} tables, if appropriate}
 
 \wss{Remove this section if it isn't needed}
 
@@ -83,406 +83,434 @@ in.}
 \pagenumbering{arabic}
 
 This document ... \wss{provide an introductory blurb and roadmap of the
-  Verification and Validation plan}
+Verification and Validation plan}
 
-\section{General Information}
+\section{Introduction}
 
-\subsection{Summary}
+\textbf{Verification and validation} (\textbf{VnV}) ensures that the project sufficiently satisfies its requirements. If the project fails to satisfy its requirements, then VnV discusses and documents the extent of this failure.
+VnV splits into \textbf{verification} and \textbf{validation}. Verification verifies the soft-ware against a set of requirements; validation considers the necessity and feasibility of requirements.
 
-\wss{Say what software is being tested.  Give its name and a brief overview of
-  its general functions.}
+This section divides into the following subsections:
+\begin{enumerate}
+  \item \textbf{Objectives} discusses the definition of verification and validation and the purpose of this document
+  \item \textbf{Characteristics of Intended Readers}| discusses characteristics required to understand this document
+  \item \textbf{Relevant Documentation} lists documents that are referenced in this document.
+\end{enumerate}
 
 \subsection{Objectives}
+\label{subsec:objectives}
+This document is the \textbf{verification and validation plan} (\textbf{VnV plan}), which documents the planning and instructs the implementation of VnV procedures. The VnV plan starts after the requirements stage and before the design stage, then undergoes iterative refinements as development continues.
 
-\wss{State what is intended to be accomplished.  The objective will be around
-  the qualities that are most important for your project.  You might have
-  something like: ``build confidence in the software correctness,''
-  ``demonstrate adequate usability.'' etc.  You won't list all of the qualities,
-  just those that are most important.}
 
-\wss{You should also list the objectives that are out of scope.  You don't have 
-the resources to do everything, so what will you be leaving out.  For instance, 
-if you are not going to verify the quality of usability, state this.  It is also 
-worthwhile to justify why the objectives are left out.}
+\subsubsection{Limitations of Testing}
+\label{subsubsec:limitations}
+Testing cannot ensure correctness, only that the program performs correctly for the tested test cases. Testing only builds confidence that the software is correct. Techniques (such as unit testing) and metrics (such as coverage metrics) improve the effectiveness of tests at building performance.
 
-\wss{The objectives are important because they highlight that you are aware of 
-limitations in your resources for verification and validation.  You can't do everything, 
-so what are you going to prioritize?  As an example, if your system depends on an 
-external library, you can explicitly state that you will assume that external library 
-has already been verified by its implementation team.}
+\subsection{Characteristics of Intended Readers}
+\label{subsec:characteristics}
+This document is designed for readers with the following roles and characteristics. Readers with these characteristics should be able to understand this document.
+\textbf{Developers} design and implement Agolearn test cases following this document. Developers have the following characteristics:
+\begin{itemize}
+  \item	Understanding of modular testing
+  \item	Familiarity with evolutionary learning comparable to a graduate course on evolutionary learning
+\end{itemize}
+
+\textbf{Users} consult test cases to understand \thisproject and its capabilities. Users have the following characteristics:
+
+\begin{itemize}
+  \item	Understanding of modular software design
+  \item	Familiarity with evolutionary learning comparable to a graduate course on evolutionary learning
+\end{itemize}
 
 \subsection{Relevant Documentation}
+This document references the following documents:
+\begin{itemize}
+  \item	SRS.pdf: Requirement specifications 
+\end{itemize}
 
-\wss{Reference relevant documentation.  This will definitely include your SRS
-  and your other project documents (design documents, like MG, MIS, etc).  You
-  can include these even before they are written, since by the time the project
-  is done, they will be written.}
-
-\citet{SRS}
-
-\wss{Don't just list the other documents.  You should explain why they are relevant and 
-how they relate to your VnV efforts.}
-
-\section{Plan}
-
-\wss{Introduce this section.   You can provide a roadmap of the sections to
-  come.}
-
-\subsection{Verification and Validation Team}
-
-\wss{Your teammates.  Maybe your supervisor.
-  You should do more than list names.  You should say what each person's role is
-  for the project's verification.  A table is a good way to summarize this information.}
-
-\subsection{SRS Verification Plan}
-
-\wss{List any approaches you intend to use for SRS verification.  This may include
-  ad hoc feedback from reviewers, like your classmates, or you may plan for 
-  something more rigorous/systematic.}
-
-\wss{Maybe create an SRS checklist?}
-
-\subsection{Design Verification Plan}
-
-\wss{Plans for design verification}
-
-\wss{The review will include reviews by your classmates}
-
-\wss{Create a checklists?}
-
-\subsection{Verification and Validation Plan Verification Plan}
-
-\wss{The verification and validation plan is an artifact that should also be
-verified.  Techniques for this include review and mutation testing.}
-
-\wss{The review will include reviews by your classmates}
-
-\wss{Create a checklists?}
-
-\subsection{Implementation Verification Plan}
-
-\wss{You should at least point to the tests listed in this document and the unit
-  testing plan.}
-
-\wss{In this section you would also give any details of any plans for static
-  verification of the implementation.  Potential techniques include code
-  walkthroughs, code inspection, static analyzers, etc.}
-
-\subsection{Automated Testing and Verification Tools}
-
-\wss{What tools are you using for automated testing.  Likely a unit testing
-  framework and maybe a profiling tool, like ValGrind.  Other possible tools
-  include a static analyzer, make, continuous integration tools, test coverage
-  tools, etc.  Explain your plans for summarizing code coverage metrics.
-  Linters are another important class of tools.  For the programming language
-  you select, you should look at the available linters.  There may also be tools
-  that verify that coding standards have been respected, like flake9 for
-  Python.}
-
-\wss{If you have already done this in the development plan, you can point to
-that document.}
-
-\wss{The details of this section will likely evolve as you get closer to the
-  implementation.}
-
-\subsection{Software Validation Plan}
-
-\wss{If there is any external data that can be used for validation, you should
-  point to it here.  If there are no plans for validation, you should state that
-  here.}
-
-\wss{You might want to use review sessions with the stakeholder to check that
-the requirements document captures the right requirements.  Maybe task based
-inspection?}
-
-\wss{For those capstone teams with an external supervisor, the Rev 0 demo should 
-be used as an opportunity to validate the requirements.  You should plan on 
-demonstrating your project to your supervisor shortly after the scheduled Rev 0 demo.  
-The feedback from your supervisor will be very useful for improving your project.}
-
-\wss{For teams without an external supervisor, user testing can serve the same purpose 
-as a Rev 0 demo for the supervisor.}
-
-\wss{This section might reference back to the SRS verification section.}
-
-\section{System Test Description}
-	
-\subsection{Tests for Functional Requirements}
-
-\wss{Subsets of the tests may be in related, so this section is divided into
-  different areas.  If there are no identifiable subsets for the tests, this
-  level of document structure can be removed.}
-
-\wss{Include a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good here.}
-
-\subsubsection{Area of Testing1}
-
-\wss{It would be nice to have a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good here.  If a section
-  covers tests for input constraints, you should reference the data constraints
-  table in the SRS.}
-		
-\paragraph{Title for Test}
-
+\section{Scope of Tests}
+This section discusses what tests do and do not cover. This section includes the following subsections:
 \begin{enumerate}
+  \item \textbf{Assumptions} lists conditions that are assumed to be true by all test cases
+  \item \textbf{Ignored Categories} lists conditions that are not tested
+  \item \textbf{Machinery} lists machinery that are used to describe test cases
+\end{enumerate}
+\subsection{Assumptions}
+Validation and verification procedures make the following assumptions:
+\begin{itemize}
+  \item \textbf{Locality}: The library is always available and exists locally. Access to the internet is unavailable.
+  \item \textbf{The environment is abstract}: System-dependent resources, such as environment variables and system calls, are not explicitly available.
+  \item \textbf{Direct access}: Test primitives can directly invoke the tested interface.
+  \item \textbf{Resources are abundant}: Tests can use as much computational re-source as necessary.
+  \item 
+\end{itemize}
 
-\item{test-id1\\}
+\subsection{Ignored Categories}
+The following properties are either infeasible or impossible to test. Measure these properties, but do not write test cases for these measurements.
+\begin{itemize}
+  \item \textbf{Performance}. The software is not performance sensitive.
+\end{itemize}
 
-Control: Manual versus Automatic
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
-
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-					
-How test will be performed: 
-					
-\item{test-id2\\}
-
-Control: Manual versus Automatic
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
-
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-
-How test will be performed: 
-
+\subsection{Machinery}
+The following subsections describe the machinery of testing.
+\begin{enumerate}
+  \item \textbf{Constants} are immutable values.
+  \item \textbf{Pseudo-Oracles} are reference implementations that behave similarly to Agolearn.
+  \item \textbf{Interfaces} lists objects that are used in testing, and describes how to interact with these objects.
+  \item \textbf{Primitives} are functions that facilitate the testing process.
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
+\subsubsection{Constants}
+The following table describes testing constants in the following types:
 
-...
+\begin{itemize}
+  \item \textbf{Ground truths} are constants known before the fact. These constants describe the reality that is captured by the project.
+  \item \textbf{Test Constants} are constants only used in test cases.
+  \item \textbf{Error Margins} are special test constants that describe the leniency of test cases. A test case passes if the difference is within the given error margin.
+\end{itemize}
 
-\subsection{Tests for Nonfunctional Requirements}
 
-\wss{The nonfunctional requirements for accuracy will likely just reference the
-  appropriate functional tests from above.  The test cases should mention
-  reporting the relative error for these tests.  Not all projects will
-  necessarily have nonfunctional requirements related to accuracy}
+\begin{table}[!h]
+  \caption{Ground Truths}
+  \label{table:ground-truths}
+  \begin{tabularx}{\textwidth}{p{3cm}X}
+    \toprule {\bf Symbol} & {\bf Description}\\
+    \midrule
+    Placeholder & what \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
 
-\wss{Tests related to usability could include conducting a usability test and
-  survey.  The survey will be in the Appendix.}
+\begin{table}[!h]
+  \caption{Test Constants}
+  \label{table:test-constants}
+  \begin{tabularx}{\textwidth}{p{3cm}X}
+    \toprule {\bf Symbol} & {\bf Description}\\
+    \midrule
+    Placeholder & what \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
 
-\wss{Static tests, review, inspections, and walkthroughs, will not follow the
-format for the tests given below.}
+\begin{table}[!h]
+  \caption{Error Margins}
+  \label{table:error-margins}
+  \begin{tabularx}{\textwidth}{p{3cm}X}
+    \toprule {\bf Symbol} & {\bf Description}\\
+    \midrule
+    $\delta_{F}$ & Error margin for floating-point comparisons \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
 
-\subsubsection{Area of Testing1}
-		
-\paragraph{Title for Test}
+\subsubsection{Pseud-Oracles}
+\begin{itemize}
+  \item \textbf{Pyvolution}: A modular evolutionary learning framework
+\end{itemize}
 
-\begin{enumerate}
 
-\item{test-id1\\}
+\subsubsection{Interfaces}
+A genome describes a solution representation. The fitness of a genome positively correlates to its suitability as a solution.
 
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input/Condition: 
-					
-Output/Result: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
+\begin{table}[!ht]
+  \caption{Genome}
+  \label{table:genome}
+  \begin{tabularx}{\textwidth}{p{3cm}X}
+    \toprule
+    {\bf Name} & Genome \\
+    \midrule
+    {\bf Type} & Data Structure \\
+    \midrule
+    {\bf Attributes} & {
+    \begin{tabularx}{\textwidth}{@{}p{3cm}X}
+      $\mathrm{fitness}:\mathrm{Real}$ & Quality of solution\\
+    \end{tabularx}}
+    \\
+    \bottomrule\\
+  \end{tabularx}
+\end{table}
 
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
-
-\end{enumerate}
-
-\subsubsection{Area of Testing2}
-
-...
-
-\subsection{Traceability Between Test Cases and Requirements}
-
-\wss{Provide a table that shows which test cases are supporting which
-  requirements.}
-
-\section{Unit Test Description}
-
-\wss{This section should not be filled in until after the MIS (detailed design
-  document) has been completed.}
-
-\wss{Reference your MIS (detailed design document) and explain your overall
-philosophy for test case selection.}  
-
-\wss{To save space and time, it may be an option to provide less detail in this section.  
-For the unit tests you can potentially layout your testing strategy here.  That is, you 
-can explain how tests will be selected for each module.  For instance, your test building 
-approach could be test cases for each access program, including one test for normal behaviour 
-and as many tests as needed for edge cases.  Rather than create the details of the input 
-and output here, you could point to the unit testing code.  For this to work, you code 
-needs to be well-documented, with meaningful names for all of the tests.}
-
-\subsection{Unit Testing Scope}
-
-\wss{What modules are outside of the scope.  If there are modules that are
-  developed by someone else, then you would say here if you aren't planning on
-  verifying them.  There may also be modules that are part of your software, but
-  have a lower priority for verification than others.  If this is the case,
-  explain your rationale for the ranking of module importance.}
-
-\subsection{Tests for Functional Requirements}
-
-\wss{Most of the verification will be through automated unit testing.  If
-  appropriate specific modules can be verified by a non-testing based
-  technique.  That can also be documented in this section.}
-
-\subsubsection{Module 1}
-
-\wss{Include a blurb here to explain why the subsections below cover the module.
-  References to the MIS would be good.  You will want tests from a black box
-  perspective and from a white box perspective.  Explain to the reader how the
-  tests were selected.}
-
-\begin{enumerate}
-
-\item{test-id1\\}
-
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
-
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-
-How test will be performed: 
-					
-\item{test-id2\\}
-
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-					
-Initial State: 
-					
-Input: 
-					
-Output: \wss{The expected result for the given inputs}
-
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
-
-How test will be performed: 
-
-\item{...\\}
+\begin{table}[!ht]
+  \caption{Population Factory}
+  \label{table:population-factory}
+  \begin{tabularx}{\textwidth}{p{3cm}X}
+    \toprule
+    {\bf Name} & population\_factory \\
+    \midrule
+    {\bf Type} & $\textrm{Set}[\textrm{Genome}]\rightarrow \textrm{Population}$ \\
     
-\end{enumerate}
+    \bottomrule\\
+  \end{tabularx}
+\end{table}
 
-\subsubsection{Module 2}
+\begin{table}[!ht]
+  \caption{Population}
+  \label{table:population}
+  \begin{tabularx}{\textwidth}{p{3cm}X}
+    \toprule
+    {\bf Name} & Population \\
+    \midrule
+    {\bf Type} & Data Structure \\
+    \midrule
+    {\bf Attributes} & {
+    \begin{tabularx}{\textwidth}{@{}p{3cm}X}
+      $\mathrm{size}:\mathrm{Int_{\ge 0}}$ & Number of genomes in population\\
+    \end{tabularx}}
+    \\
+    \bottomrule\\
+  \end{tabularx}
+\end{table}
 
-...
+\todo{Find better names for `arity'}
+\begin{table}[!ht]
+  \caption{Variator}
+  \label{table:variator}
+  \begin{tabularx}{\textwidth}{p{3cm}X}
+    \toprule
+    {\bf Name} & Variator \\
+    \midrule
+    {\bf Type} & $\textrm{Population} \rightarrow \textrm{Population}$ \\
+    \midrule
+    {\bf Attributes} & {
+    \begin{tabularx}{\textwidth}{@{}p{3cm}X}
+      $\mathrm{arity}:\mathrm{Int_{\ge 0}}$ & Input arity\\
+      $\mathrm{coarity}:\mathrm{Int_{\ge 0}}$ & Output arity\\
+      $\mathrm{residual}:\mathrm{Int_{\ge 0}}$ & Extra children\\
+    \end{tabularx}}
+    \\
+    \bottomrule\\
+  \end{tabularx}
+\end{table}
 
-\subsection{Tests for Nonfunctional Requirements}
+\begin{table}[!ht]
+  \caption{Selector}
+  \label{table:selector}
+  \begin{tabularx}{\textwidth}{p{3cm}X}
+    \toprule
+    {\bf Name} & Selector \\
+    \midrule
+    {\bf Type} & $\textrm{Population} \rightarrow \textrm{Population}$ \\
+    \midrule
+    {\bf Attributes} & {
+    \begin{tabularx}{\textwidth}{@{}p{3cm}X}
+      $\mathrm{outsize}:\mathrm{Int_{\ge 0}}$ & Size of the output population
+    \end{tabularx}}
+    \\
+    \bottomrule\\
+  \end{tabularx}
+\end{table}
 
-\wss{If there is a module that needs to be independently assessed for
-  performance, those test cases can go here.  In some projects, planning for
-  nonfunctional tests of units will not be that relevant.}
+\begin{table}[!ht]
+  \caption{Evaluator}
+  \label{table:evaluator}
+  \begin{tabularx}{\textwidth}{p{3cm}X}
+    \toprule
+    {\bf Name} & Evaluator \\
+    \midrule
+    {\bf Type} & $\mathrm{Genome} \rightarrow \mathrm{Real}$ \\
+    
+    \bottomrule\\
+  \end{tabularx}
+\end{table}
 
-\wss{These tests may involve collecting performance data from previously
-  mentioned functional tests.}
+\subsubsection{Primitives}
+The $\mathrm{assert\_epsilon}$ primitive compares floating-point numbers, accounting for floating-point errors.
+\begin{algorithm}[H]
+  $\mathrm{assert\_ epsilon} : \mathbb{R} \times \mathbb{R} \times \mathbb{R} \rightarrow \{\bot, \top\}$
+  
+  $\mathrm{assert\_ epsilon}(a,b,\varepsilon)$:
+  
+  \eIf{$|a-b|<\varepsilon$}{
+  \Return {$\top$}
+  }{
+  \Return {$\bot$}
+  }
+\end{algorithm}
 
-\subsubsection{Module ?}
-		
-\begin{enumerate}
+The type primitive returns the mathematical type of its argument.
 
-\item{test-id1\\}
+\begin{algorithm}[H]
+  $\mathrm{type} : \mathrm{Any} \rightarrow \mathrm{Type}$
 
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-					
-Initial State: 
-					
-Input/Condition: 
-					
-Output/Result: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
+  $\mathrm{type} (o)$:
 
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
+  \Return {the type of $o$}
+\end{algorithm}
 
-\end{enumerate}
+The $\mathrm{best\_fit}$ primitive returns a member of a population with the highest fitness
 
-\subsubsection{Module ?}
+\newcommand{\argmax}{\mathop{\mathrm{argmax}}}
+\begin{algorithm}[H]
+  $\mathrm{best\_fit} : \mathrm{Population} \rightarrow \mathrm{Genome}$
 
-...
+  $\mathrm{best\_fit}(G)$:
 
-\subsection{Traceability Between Test Cases and Modules}
+  \Return {$\argmax_{g\in G}\{g.\mathrm{fitness}\}$}
+\end{algorithm}
 
-\wss{Provide evidence that all of the modules have been considered.}
-				
-\bibliographystyle{plainnat}
+\subsection{Test Plan}
+\subsubsection{Verification and Validation Team}
+The VnV team includes verifiers and validators.
+\textbf{Verifiers}: The following people review the implementation of this project.
 
-\bibliography{../../refs/References}
+\begin{tabularx}{\textwidth}{p{3cm}X}
+  \toprule {\bf Name} & {\bf Role}\\
+  \midrule
+  Yiding Li & Designer and implementor of test cases \\
+  Stephen Kelly & Domain expert and usability reviewer  \\
+  \bottomrule
+\end{tabularx}
 
-\newpage
+\textbf{Validators}: The following people review design artefacts.
 
-\section{Appendix}
+\begin{tabularx}{\textwidth}{p{3cm}X}
+  \toprule {\bf Name} & {\bf Role}\\
+  \midrule
+  Yiding Li&Author of development artefacts\\
+  Spencer Smith&Course instructor,  reviewer\\
+  Fasil Cheema&Domain expert and primary  reviewer\\
+  Fatemah&SRS reviewer\\
+  Tanya Djavaherpou&VnV reviewer\\
+  Phil Du&MG + MIS reviewer\\
+  \bottomrule
+\end{tabularx}
 
-This is where you can place additional information.
+\subsection{Test Plan}
+This section describes elements that should be tested, and how to test them. These elements are as follows:
+\begin{itemize}
+  \item \textbf{Conditions}: preconditions, postconditions, and invariants
+  \item \textbf{Functional Requirements}: functional requirements sourced from SRS.pdf
+  \item \textbf{Nonfunctional Requirements}: nonfunctional requirements sourced from SRS.pdf
+  \item \textbf{Coverage}: coverage criteria that should be met by test cases.
+  \item \textbf{Traceability} Information: Reference from test cases to requirements.
+\end{itemize}
 
-\subsection{Symbolic Parameters}
+\subsubsection{Conditions}
+\textbf{C1}: The size of a population follows its variators.
 
-The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
-Their values are defined in this section for easy maintenance.
+\begin{table}[!ht]
+  \caption{T1: Test Plan for C1}
+  \label{table:t1}
+  \begin{tabularx}{\textwidth}{p{3cm}X}
+    \toprule
+    {\bf Subject} & A variator\\
+    {\bf Control} & Manual\\
+    {\bf Initial State} & A population $P$ is initialized and available
 
-\subsection{Usability Survey Questions?}
+    A variator $V$ is initialized and available\\
+    {\bf Input} & A population $P$\\
+    {\bf Output} & A population $P'$ whose size is
 
-\wss{This is a section that would be appropriate for some projects.}
+    $(P/(V.\mathrm{arity}))\cdot V.\mathrm{coarity}+\mathrm{extra}$\\
 
-\newpage{}
-\section*{Appendix --- Reflection}
+    \bottomrule
+  \end{tabularx}
+\end{table}
 
-The information in this section will be used to evaluate the team members on the
-graduate attribute of Lifelong Learning.  Please answer the following questions:
+\textbf{C2}: The size of a population should adhere to selectors.
+\begin{table}[!ht]
+  \caption{T2: Test Plan for C2}
+  \label{table:t2}
+  \begin{tabularx}{\textwidth}{p{3cm}X}
+    \toprule
+    {\bf Subject} & A selector\\
+    {\bf Control} & Manual\\
+    {\bf Initial State} & A population $P$ is initialized and available
 
-\newpage{}
-\section*{Appendix --- Reflection}
+    A variator $V$ is initialized and available\\
+    {\bf Input} & A population $P$\\
+    {\bf Output} & A population $P'$ whose size is
 
-\wss{This section is not required for CAS 741}
+    $\max \{S.\mathrm{outsize},P.\mathrm{size}\}$\\
+    \bottomrule
+  \end{tabularx}
+\end{table}
 
-The information in this section will be used to evaluate the team members on the
-graduate attribute of Lifelong Learning.  Please answer the following questions:
+\subsubsection{Functional Requirements}
 
-\begin{enumerate}
-  \item What knowledge and skills will the team collectively need to acquire to
-  successfully complete the verification and validation of your project?
-  Examples of possible knowledge and skills include dynamic testing knowledge,
-  static testing knowledge, specific tool usage etc.  You should look to
-  identify at least one item for each team member.
-  \item For each of the knowledge areas and skills identified in the previous
-  question, what are at least two approaches to acquiring the knowledge or
-  mastering the skill?  Of the identified approaches, which will each team
-  member pursue, and why did they make this choice?
-\end{enumerate}
+\textbf{FR1}: Type check input values
+\begin{table}[!ht]
+  \caption{T3: Test Plan for FR1}
+  \label{table:t3}
+  \begin{tabularx}{\textwidth}{p{3cm}X}
+    \toprule
+    {\bf Subject} & $\mathrm{population\_factory}$\\
+    {\bf Control} & Manual\\
+    {\bf Initial State} & A set of genomes $G$ is available\\
+    {\bf Input} & A set of genomes $G$\\
+    {\bf Output} & 
+    \begin{algorithm}[H]
+      \eIf{$\mathrm{type}(G) is \textrm{Set}[Real\rightarrow Real]~\textrm{or} \textrm{type}(G) is \textrm{Set}[(A\rightarrow B)\rightarrow Real]$}{
+        do nothing
+      }{
+        raise error
+      }
+    \end{algorithm}\\
+    
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+FR2: Interchangeability of evolutionary operators of the same kind
+\begin{adjustwidth}{2em}{0pt}
+  T4: Each individual selector, variator, and evaluator must pass all test cases for selector, variators, or evaluators respectively.
+\end{adjustwidth}
+
+
+
+FR 3: Each iteration produces a population
+\begin{adjustwidth}{2em}{0pt}
+T5: Static validation: each iteration results in a population.
+\end{adjustwidth}
+FR 4: Subsequent genomes should not have lower fitness.
+\begin{adjustwidth}{2em}{0pt}
+
+\begin{table}[!ht]
+  \caption{T6: Test Plan for FR4}
+  \label{table:t6}
+  \begin{tabularx}{\textwidth}{p{3cm}X}
+    \toprule
+    {\bf Subject} & $\mathrm{System}$\\
+    {\bf Control} & Manual\\
+    {\bf Initial State} & A population $P$ is available\\
+    A variator $V$\\
+    A selector $S$\\
+    A evaluator $E$\\
+    {\bf Input} & A population $P$\\
+    {\bf Output} & 
+    \begin{algorithm}[H]
+      Apply $E$ item-wise to $S(V(P))$. The highest-fitness item in the output $P'$ should have a higher fitness than the highest-fitness item in the previous population $P$.
+    \end{algorithm}\\
+    
+    \bottomrule
+  \end{tabularx}
+\end{table}
+\end{adjustwidth}
+
+\subsection{Non-Functional Requirements}
+FR 3: Each iteration produces a population
+\begin{adjustwidth}{2em}{0pt}
+T5: Static validation: each iteration results in a population.
+\end{adjustwidth}
+
+NFR1: Usability
+\begin{adjustwidth}{2em}{0pt}
+T7: The interface should be inspected and approved by Kelly.
+\end{adjustwidth}
+NFR 2: Understandability
+\begin{adjustwidth}{2em}{0pt}
+T8: Design artefacts should be inspected and approved by members of the validation team.
+\end{adjustwidth}
+NFR 3: Maintainability
+\begin{adjustwidth}{2em}{0pt}
+T9: Static verification: All functions should use type hints. All argu-ments of all public documents should be documented.
+\end{adjustwidth}
+NFR 4: Portability
+\begin{adjustwidth}{2em}{0pt}
+T10: Test cases should pass on a version of Microsoft Windows 11.
+\end{adjustwidth}
+
+\subsubsection{Coverage}
+Test cases should achieve 100\% function coverage. Record then document statement coverage.
 
 \end{document}
