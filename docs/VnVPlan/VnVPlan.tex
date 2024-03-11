@@ -73,10 +73,6 @@ urlcolor=blue
   \bottomrule
 \end{tabular}\\
 
-\wss{symbols, abbreviations, or acronyms --- you can simply reference the SRS
-\citep{SRS} tables, if appropriate}
-
-\wss{Remove this section if it isn't needed}
 
 \newpage
 
@@ -142,7 +138,6 @@ Validation and verification procedures make the following assumptions:
   \item \textbf{The environment is abstract}: System-dependent resources, such as environment variables and system calls, are not explicitly available.
   \item \textbf{Direct access}: Test primitives can directly invoke the tested interface.
   \item \textbf{Resources are abundant}: Tests can use as much computational re-source as necessary.
-  \item 
 \end{itemize}
 
 \subsection{Ignored Categories}
@@ -203,7 +198,7 @@ The following table describes testing constants in the following types:
   \end{tabularx}
 \end{table}
 
-\subsubsection{Pseud-Oracles}
+\subsubsection{Pseudo-Oracles}
 \begin{itemize}
   \item \textbf{Pyvolution}: A modular evolutionary learning framework
 \end{itemize}
@@ -300,7 +295,7 @@ A genome describes a solution representation. The fitness of a genome positively
   \end{tabularx}
 \end{table}
 
-\begin{table}[!ht]
+\begin{table}[!h]
   \caption{Evaluator}
   \label{table:evaluator}
   \begin{tabularx}{\textwidth}{p{3cm}X}
@@ -313,8 +308,11 @@ A genome describes a solution representation. The fitness of a genome positively
   \end{tabularx}
 \end{table}
 
+\clearpage% Leave the floats behind
+
 \subsubsection{Primitives}
 The $\mathrm{assert\_epsilon}$ primitive compares floating-point numbers, accounting for floating-point errors.
+
 \begin{algorithm}[H]
   $\mathrm{assert\_ epsilon} : \mathbb{R} \times \mathbb{R} \times \mathbb{R} \rightarrow \{\bot, \top\}$
   
@@ -328,7 +326,7 @@ The $\mathrm{assert\_epsilon}$ primitive compares floating-point numbers, accoun
 \end{algorithm}
 
 The type primitive returns the mathematical type of its argument.
-
+\begin{adjustwidth}{2em}{0pt}
 \begin{algorithm}[H]
   $\mathrm{type} : \mathrm{Any} \rightarrow \mathrm{Type}$
 
@@ -336,10 +334,12 @@ The type primitive returns the mathematical type of its argument.
 
   \Return {the type of $o$}
 \end{algorithm}
+\end{adjustwidth}
 
 The $\mathrm{best\_fit}$ primitive returns a member of a population with the highest fitness
 
 \newcommand{\argmax}{\mathop{\mathrm{argmax}}}
+\begin{adjustwidth}{2em}{0pt}
 \begin{algorithm}[H]
   $\mathrm{best\_fit} : \mathrm{Population} \rightarrow \mathrm{Genome}$
 
@@ -347,6 +347,7 @@ The $\mathrm{best\_fit}$ primitive returns a member of a population with the hig
 
   \Return {$\argmax_{g\in G}\{g.\mathrm{fitness}\}$}
 \end{algorithm}
+\end{adjustwidth}
 
 \subsection{Test Plan}
 \subsubsection{Verification and Validation Team}
