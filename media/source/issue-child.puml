@@ -1,6 +1,6 @@
 @startebnf
 skinparam defaultfontname "Open Sans"
-child-issue-title = ("FA" | "PC"), ":", title;
-child-issue-content = ("Future action" | "Pending change"), "from", "(", issue, "):", description;
-child-issue-resolution = "Resolve", ("future action" | "pending change"), "...";
+child-issue-title = ("PA" | "CA"), ":", title;
+child-issue-content = ("Pending action" | "Conditional action"), "[", issue, "]:", description;
+child-issue-resolution = "Resolve", ("pending action" | "conditional action"), "...";
 @endebnf

@@ -68,19 +68,20 @@ Following the type, note actions after acceptance (or resolution) and reasons fo
 ### Commits for Issues
 In commits that address an issue, reference that issue.
 
-In comments that close an issue, reference all commits that reference that issue.
+In comments that close an issue, optionally link all commits that reference that issue.
 
 ![](media/issue-in-commit.svg)
 
 ### Child Issues
-Before closing issues with modifiers `future action` and `pending change`, create child issues that discuss the appropriate action or change. Then, reference these child issues.
+Before closing issues with modifiers `future action` or `conditional action`, create child issues that discuss the appropriate action or change. Then, reference these child issues.
 
 In each child issue that is created this way, reference the parent issue.
 
-![](media/issue-child.svg)
-
 The workflow for spawning and closing child issues is as follows. Note to use `Resolve` and not `Accept`, since child issues are created by developers.
 
+![](media/issue-child.svg)
+
+The following diagram demonstrates the complete issue resolution process. Note the lack of forward references: the version control system should automatically generate forward references from backward references.
 ![](media/issue-resolution-process.svg)
 
 

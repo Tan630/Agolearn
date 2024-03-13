@@ -1,5 +1,5 @@
 @startebnf
 skinparam defaultfontname "Open Sans"
 commit = prefix, ["(", component,")"], ["[", issue, "]"], change;
-in-commit = "In commit", "[", commit, "]:", ("address proposed problem" | "apply proposed solution" | ?other reasons?);
+in-commit = "In commit", "[", commit, "]:", ("address problem" | "apply solution" | ?other reasons?);
 @endebnf
