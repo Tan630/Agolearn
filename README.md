@@ -68,6 +68,8 @@ The folders and files for this project are as follows:
 ## Contributing
 Please reference <a href="./CONTRIBUTING.md">CONTRIBUTING.md</a>
 
+## Roadmap
+![roadmap.png](roadmap.svg)
 
 ### Licence
 See `licenses/` for licenses for components of this project.
