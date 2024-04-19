@@ -1,5 +1,1 @@
-# Automated tests
-
-The folders and files for this folder are as follows:
-
-Describe ...
+This project has not implemened automated tests.
