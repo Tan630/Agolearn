@@ -3,7 +3,6 @@
 <p align="center">
 <img height=90 src="./icon.svg"/>
 </p>
-
 **Developer**: Yiding Li
 
 **Date of project start**: 2024-01-15
@@ -56,9 +55,15 @@ The folders and files for this project are as follows:
 
 - [x] [Problem statement](https://github.com/Tan630/Agolearn/blob/main/docs/ProblemStatementAndGoals/ProblemStatement.pdf)
 
-- [ ] Implement: optimizer for real-valued functions
+- [x] [SRS](https://github.com/Tan630/Agolearn/blob/main/docs/SRS/SRS.pdf)
 
-- [ ] Implement: optimizer for higher-order functions
+- [x] [VnV](https://github.com/Tan630/Agolearn/blob/main/docs/VnVPlan/VnVPlan.pdf)
+
+- [x] [MG]([Agolearn/docs/Design/SoftArchitecture/MG.pdf at main · Tan630/Agolearn (github.com)](https://github.com/Tan630/Agolearn/blob/main/docs/Design/SoftArchitecture/MG.pdf))
+
+- [x] [MIS](https://github.com/Tan630/Agolearn/blob/main/docs/Design/SoftDetailedDes/MIS.pdf)
+
+- [x] [Code](https://github.com/Tan630/Agolearn/blob/main/src)
 
 ## Contributing
 Please reference <a href="./CONTRIBUTING.md">CONTRIBUTING.md</a>
